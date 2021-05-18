@@ -20,7 +20,8 @@ public class Main extends Application {
             System.out.println(screen.getBounds());
         });
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("src/reconstitution/etudiant/view/homeView.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("./view/homeView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("./view/mainView.fxml"));
         primaryStage.setTitle("Reconstitution (étudiant)");
         primaryStage.setScene(new Scene(root, 720, 480));
         primaryStage.show();

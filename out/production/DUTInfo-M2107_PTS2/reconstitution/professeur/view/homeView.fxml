@@ -13,15 +13,19 @@
       <Rectangle height="480.0" stroke="BLACK" strokeType="INSIDE" width="215.0" />
       <ImageView fitHeight="53.0" fitWidth="172.0" layoutX="4.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../assets/logo_iut_laval.png" />
+            <Image url="@../../../assets/logo_iut_laval.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="45.0" fitWidth="120.0" layoutX="45.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../assets/logo_reconstitution.png" />
+            <Image url="@../../../assets/logo_reconstitution.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="248.0" fitWidth="309.0" layoutX="82.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="248.0" fitWidth="309.0" layoutX="82.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/avatar_etudiant.png" />
+         </image>
+      </ImageView>
       <Text layoutX="340.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution">
          <font>
             <Font size="55.0" />
