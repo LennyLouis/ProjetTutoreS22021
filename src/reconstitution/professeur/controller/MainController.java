@@ -30,7 +30,7 @@ public class MainController implements Initializable {
     Label tempsRestant, consigne;
 
     @FXML
-    MediaView mediaFrame;
+    MediaView mediaView;
 
 
     @Override
@@ -40,7 +40,7 @@ public class MainController implements Initializable {
         Media media = new Media(MEDIA_URL);
         mediaPlayer = new MediaPlayer(media);
 
-        mediaFrame.setMediaPlayer(mediaPlayer);
+        mediaView.setMediaPlayer(mediaPlayer);
     }
 
 

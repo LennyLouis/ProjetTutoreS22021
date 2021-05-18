@@ -17,7 +17,7 @@ public class Main extends Application {
             System.out.println(screen.getBounds());
         });
 
-        Parent root = FXMLLoader.load(getClass().getResource("professeur/view/mainView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("./view/mainView.fxml"));
         primaryStage.setTitle("Reconstitution (professeur)");
         primaryStage.setScene(new Scene(root, 720, 480));
         primaryStage.show();

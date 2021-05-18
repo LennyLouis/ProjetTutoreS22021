@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -20,10 +21,11 @@ public class Main extends Application {
             System.out.println(screen.getBounds());
         });
 
-        //Parent root = FXMLLoader.load(getClass().getResource("./view/homeView.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("./view/mainView.fxml"));
+        Parent home = FXMLLoader.load(getClass().getResource("./view/homeView.fxml"));
+        Parent main = FXMLLoader.load(getClass().getResource("./view/mainView.fxml"));
         primaryStage.setTitle("Reconstitution (étudiant)");
-        primaryStage.setScene(new Scene(root, 720, 480));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../../assets/icon_reconstitution.png")));
+        primaryStage.setScene(new Scene(home, 720, 480));
         primaryStage.show();
     }
 

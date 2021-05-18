@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reconstitution.etudiant.controller.HomeController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reconstitution.etudiant.controller.HomeController">
    <children>
       <Rectangle height="480.0" stroke="BLACK" strokeType="INSIDE" width="215.0" />
       <ImageView fitHeight="53.0" fitWidth="172.0" layoutX="4.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
@@ -33,6 +33,6 @@
       </Text>
       <Text layoutX="345.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Apprendre une langue étrangère facilement, c'est possible !&quot;" />
       <Text layoutX="345.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version étudiant" />
-      <Button fx:id="launchButton" layoutX="329.0" layoutY="346.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Commencer" />
+      <Button fx:id="launchButton" layoutX="329.0" layoutY="346.0" mnemonicParsing="false" onAction="#launchApp" prefHeight="25.0" prefWidth="142.0" text="Commencer" />
    </children>
 </AnchorPane>
