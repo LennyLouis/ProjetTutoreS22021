@@ -21,18 +21,14 @@
             <Image url="@../../assets/logo_reconstitution.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="248.0" fitWidth="309.0" layoutX="82.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../assets/avatar_etudiant.png" />
-         </image>
-      </ImageView>
+      <ImageView fitHeight="248.0" fitWidth="309.0" layoutX="82.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
       <Text layoutX="340.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution">
          <font>
             <Font size="55.0" />
          </font>
       </Text>
       <Text layoutX="345.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Apprendre une langue étrangère facilement, c'est possible !&quot;" />
-      <Text layoutX="345.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version étudiant" />
+      <Text layoutX="345.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version professeur" />
       <Button fx:id="launchButton" layoutX="329.0" layoutY="346.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Commencer" />
    </children>
 </AnchorPane>
