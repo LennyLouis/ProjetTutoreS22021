@@ -24,7 +24,7 @@ public class Main extends Application {
         Parent home = FXMLLoader.load(getClass().getResource("./view/homeView.fxml"));
         Parent main = FXMLLoader.load(getClass().getResource("./view/mainView.fxml"));
         primaryStage.setTitle("Reconstitution (étudiant)");
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../../assets/icon_reconstitution.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../../reconstitution.assets/icon_reconstitution.png")));
         primaryStage.setScene(new Scene(home, 720, 480));
         primaryStage.show();
     }

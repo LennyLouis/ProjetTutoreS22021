@@ -16,13 +16,13 @@
    <children>
       <ImageView fitHeight="65.0" fitWidth="720.0" layoutY="415.0" pickOnBounds="true">
          <image>
-            <Image url="@../../../assets/background_cut.png" />
+            <Image url="@../../assets/background_cut.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#073763" height="226.0" stroke="BLACK" strokeType="INSIDE" width="720.0" />
       <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="648.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../assets/avatar_etudiant.png" />
+            <Image url="@../../assets/avatar_etudiant.png" />
          </image>
       </ImageView>
       <TextArea fx:id="mediaTextArea" layoutX="375.0" layoutY="20.0" prefHeight="300.0" prefWidth="320.0" />
