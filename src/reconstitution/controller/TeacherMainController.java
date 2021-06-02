@@ -51,11 +51,12 @@ public class TeacherMainController implements Initializable {
     public void play() {
         if (playPauseSwitch) {
             mediaPlayer.play();
-            playPauseSwitch = false;
         } else {
-            playPauseSwitch = true;
             mediaPlayer.pause();
         }
+        playPauseSwitch = !playPauseSwitch;
     }
+
+
 
 }

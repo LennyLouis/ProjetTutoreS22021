@@ -8,12 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import reconstitution.controller.StudentHomeController;
 
 import java.io.IOException;
 
 public class MainStudent extends Application {
 
     private static Stage stage;
+    private static Scene scene;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -22,12 +24,7 @@ public class MainStudent extends Application {
         screenSizes.forEach(screen -> {
             System.out.println(screen.getBounds());
         });
-
-        Parent home = FXMLLoader.load(getClass().getResource("view/studentHomeView.fxml"));
-        stage.setTitle("Reconstitution (étudiant)");
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/icon_reconstitution.png")));
-        stage.setScene(new Scene(home, 720, 480));
-        stage.show();
+        setView("/view/studentHomeView.fxml");
     }
 
 
@@ -35,11 +32,20 @@ public class MainStudent extends Application {
         launch(args);
     }
 
-    public static void changeView(String path) throws IOException {
+    public static void setView(String path) throws IOException {
         Parent parent = FXMLLoader.load(MainStudent.class.getResource(path));
         stage.setTitle("Reconstitution (étudiant)");
-        stage.getIcons().add(new Image(MainStudent.class.getResourceAsStream("images/icon_reconstitution.png")));
-        stage.setScene(new Scene(parent, 720, 480));
+        stage.getIcons().add(new Image(MainStudent.class.getResourceAsStream("/images/icon_reconstitution.png")));
+        scene = new Scene(parent, 720, 480);
+        stage.setScene(scene);
         stage.show();
+    }
+
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static Scene getScene() {
+        return scene;
     }
 }

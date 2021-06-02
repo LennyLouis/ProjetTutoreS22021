@@ -12,10 +12,10 @@ import java.util.ResourceBundle;
 
 public class StudentMainController implements Initializable {
 
-    MediaPlayer mediaPlayer;
+    private boolean playPauseSwitch;
+    private boolean muteSwitch;
 
-    @FXML
-    Button playBouton, muteBouton, pleinecranBouton, reponseBouton;
+    MediaPlayer mediaPlayer;
 
     @FXML
     ProgressBar mediaProgressBar;
@@ -34,6 +34,8 @@ public class StudentMainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        muteSwitch = false;
+        playPauseSwitch = false;
         String MEDIA_URL = "https://liveexample.pearsoncmg.com/common/sample.mp4";
 
         Media media = new Media(MEDIA_URL);
@@ -41,8 +43,6 @@ public class StudentMainController implements Initializable {
 
         mediaView.setMediaPlayer(mediaPlayer);
     }
-
-    boolean playPauseSwitch = false;
 
     @FXML
     public void play() {
@@ -53,6 +53,17 @@ public class StudentMainController implements Initializable {
             playPauseSwitch = true;
             mediaPlayer.pause();
         }
+    }
+
+    @FXML
+    public void mute(){
+        mediaPlayer.setMute(muteSwitch);
+        muteSwitch = !muteSwitch;
+    }
+
+    @FXML
+    public void reponse(){
+
     }
 
 }
