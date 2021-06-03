@@ -18,7 +18,7 @@
       </ImageView>
       <ImageView fitHeight="45.0" fitWidth="120.0" layoutX="45.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../resources/images/logo_reconstitution.png" />
+            <Image url="@../images/logo_reconstitution.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="248.0" fitWidth="309.0" layoutX="82.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">

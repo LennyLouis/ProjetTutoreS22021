@@ -38,7 +38,7 @@
       </Label>
       <HBox layoutX="-4.0" layoutY="267.0" prefHeight="136.0" prefWidth="728.0">
          <children>
-            <ImageView fx:id="createExercise" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="createExercise" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="homeTeacherIg">
                <image>
                   <Image url="@../images/exercice.png" />
                </image>
@@ -49,7 +49,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="createEvaluation" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="createEvaluation" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="homeTeacherIg">
                <image>
                   <Image url="@../images/evaluation.png" />
                </image>
@@ -60,7 +60,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="correctExercise" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="correctExercise" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="homeTeacherIg">
                <image>
                   <Image url="@../images/correction.PNG" />
                </image>

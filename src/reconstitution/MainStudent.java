@@ -15,7 +15,6 @@ import java.io.IOException;
 public class MainStudent extends Application {
 
     private static Stage stage;
-    private static Scene scene;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -36,16 +35,13 @@ public class MainStudent extends Application {
         Parent parent = FXMLLoader.load(MainStudent.class.getResource(path));
         stage.setTitle("Reconstitution (étudiant)");
         stage.getIcons().add(new Image(MainStudent.class.getResourceAsStream("/images/icon_reconstitution.png")));
-        scene = new Scene(parent, 720, 480);
+        Scene scene = new Scene(parent, 720, 480);
+        scene.getStylesheets().add(String.valueOf(MainStudent.class.getResource("/style.css")));
         stage.setScene(scene);
         stage.show();
     }
 
     public static Stage getStage() {
         return stage;
-    }
-
-    public static Scene getScene() {
-        return scene;
     }
 }

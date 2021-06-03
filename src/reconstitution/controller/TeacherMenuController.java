@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import reconstitution.MainTeacher;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,16 +23,30 @@ public class TeacherMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        createExercise.setOnMouseClicked(mouseEvent -> newExercise());
-        createEvaluation.setOnMouseClicked(mouseEvent -> newEvaluation());
+        createExercise.setOnMouseClicked(mouseEvent -> {
+            try {
+                newExercise();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        createEvaluation.setOnMouseClicked(mouseEvent -> {
+            try {
+                newEvaluation();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         correctExercise.setOnMouseClicked(mouseEvent -> correction());
     }
 
-    public void newExercise(){
+    public void newExercise() throws IOException {
+        MainTeacher.setView("/view/teacherCreateView.fxml");
         System.out.println("exercice");
     }
 
-    public void newEvaluation() {
+    public void newEvaluation() throws IOException {
+        MainTeacher.setView("/view/teacherCreateView.fxml");
         System.out.println("evaluation");
     }
 

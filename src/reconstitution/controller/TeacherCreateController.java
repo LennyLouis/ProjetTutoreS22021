@@ -2,56 +2,26 @@ package reconstitution.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import reconstitution.MainTeacher;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TeacherCreateController implements Initializable {
 
-    MediaPlayer mediaPlayer;
-
     @FXML
-    Button playBouton, muteBouton, pleinecranBouton, reponseBouton;
-
-    @FXML
-    ProgressBar mediaProgressBar;
-
-    @FXML
-    TextField reponseTextField;
-
-    @FXML
-    TextArea mediaTextArea;
-
-    @FXML
-    Label tempsRestant, consigne;
-
-    @FXML
-    MediaView mediaView;
-
+    Rectangle addMedia;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        addMedia.setOnMouseClicked(mouseEvent -> openMedia());
     }
 
-
-
-    boolean playPauseSwitch = false;
-
-    @FXML
-    public void play() {
-        if (playPauseSwitch) {
-            mediaPlayer.play();
-        } else {
-            mediaPlayer.pause();
-        }
-        playPauseSwitch = !playPauseSwitch;
+    public void openMedia(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.showOpenDialog(MainTeacher.getStage());
     }
-
-
-
 }

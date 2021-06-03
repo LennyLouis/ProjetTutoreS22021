@@ -35,7 +35,13 @@ public class MainTeacher extends Application {
         Parent parent = FXMLLoader.load(MainStudent.class.getResource(path));
         stage.setTitle("Reconstitution (professeur)");
         stage.getIcons().add(new Image(MainStudent.class.getResourceAsStream("/images/icon_reconstitution.png")));
-        stage.setScene(new Scene(parent, 720, 480));
+        Scene scene = new Scene(parent, 720, 480);
+        scene.getStylesheets().add(String.valueOf(MainTeacher.class.getResource("/style.css")));
+        stage.setScene(scene);
         stage.show();
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 }

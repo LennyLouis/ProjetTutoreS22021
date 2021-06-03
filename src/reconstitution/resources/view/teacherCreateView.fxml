@@ -9,6 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reconstitution.controller.TeacherCreateController">
    <children>
@@ -36,5 +37,6 @@
          </image>
       </ImageView>
       <Hyperlink layoutX="608.0" layoutY="365.0" text="Options" />
+      <Rectangle fx:id="addMedia" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="309.0" layoutX="395.0" layoutY="17.0" stroke="BLACK" strokeType="INSIDE" width="309.0" />
    </children>
 </AnchorPane>
