@@ -33,7 +33,7 @@ public class MainTeacher extends Application {
 
     public static void setView(String path) throws IOException {
         Parent parent = FXMLLoader.load(MainStudent.class.getResource(path));
-        stage.setTitle("Reconstitution (étudiant)");
+        stage.setTitle("Reconstitution (professeur)");
         stage.getIcons().add(new Image(MainStudent.class.getResourceAsStream("/images/icon_reconstitution.png")));
         stage.setScene(new Scene(parent, 720, 480));
         stage.show();

@@ -10,7 +10,7 @@ import javafx.scene.media.MediaView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TeacherMainController implements Initializable {
+public class TeacherCreateController implements Initializable {
 
     MediaPlayer mediaPlayer;
 
@@ -35,12 +35,7 @@ public class TeacherMainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String MEDIA_URL = "https://liveexample.pearsoncmg.com/common/sample.mp4";
 
-        Media media = new Media(MEDIA_URL);
-        mediaPlayer = new MediaPlayer(media);
-
-        mediaView.setMediaPlayer(mediaPlayer);
     }
 
 

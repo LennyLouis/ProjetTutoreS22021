@@ -60,7 +60,7 @@ public class Texte {
 
 	//Methode
 	public void entrerTexte(String texte) {
-		int c = 0;									//compteur de "case" utilisées du tableau
+		int c = 0;									//compteur de "case" utilisÃ©es du tableau
 		for(int i = 0; i < texte.length(); i++) {
 			String mot = "";
 			if(texte.charAt(i) != ' ' && texte.charAt(i) != '.' && texte.charAt(i) != '!' && texte.charAt(i) != '?') {
@@ -72,7 +72,7 @@ public class Texte {
 				texteClair[c] = mot;
 				nbMotsTotal++;
 				
-				//remplissage du texte masqué avec le caratère occultant
+				//remplissage du texte masquÃ© avec le caratÃ¨re occultant
 				for(int a = 0; a < mot.length(); a++) {
 					texteOccult[c] = texteOccult[c] + occultChar;
 				}
