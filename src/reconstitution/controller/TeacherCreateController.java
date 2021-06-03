@@ -21,7 +21,7 @@ public class TeacherCreateController implements Initializable {
 
     public void openMedia(){
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Choisir un média");
         fileChooser.showOpenDialog(MainTeacher.getStage());
     }
 }
