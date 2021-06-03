@@ -10,7 +10,7 @@ public class TeacherHomeController {
 
     @FXML
     public void launchApp() throws IOException {
-        MainTeacher.setView("/view/teacherMainView.fxml");
+        MainTeacher.setView("/view/teacherMenuView.fxml");
     }
 
 }

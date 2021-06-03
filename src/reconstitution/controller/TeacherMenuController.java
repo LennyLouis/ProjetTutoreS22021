@@ -16,4 +16,19 @@ public class TeacherMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+    @FXML
+    public void createExercice(){
+        System.out.println("exercice");
+    }
+
+    @FXML
+    public void createEvaluation() {
+        System.out.println("evaluation");
+    }
+
+    @FXML
+    public void correctExercice() {
+        System.out.println("correct");
+    }
 }
