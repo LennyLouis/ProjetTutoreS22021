@@ -23,7 +23,7 @@
       </ImageView>
       <ImageView fitHeight="248.0" fitWidth="309.0" layoutX="82.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../resources/images/avatar_etudiant.png" />
+            <Image url="@../images/prof_icon.png" />
          </image>
       </ImageView>
       <Text layoutX="340.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reconstitution">
