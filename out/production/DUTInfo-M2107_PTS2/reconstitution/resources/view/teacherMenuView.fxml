@@ -26,12 +26,12 @@
             <Image url="@../images/prof_icon.png" />
          </image>
       </ImageView>
-      <Label layoutX="255.0" layoutY="54.0" text="Reconstitution" textFill="WHITE">
+      <Label layoutX="255.0" layoutY="54.0" styleClass="title" text="Reconstitution" textFill="WHITE">
          <font>
             <Font size="64.0" />
          </font>
       </Label>
-      <Label layoutX="255.0" layoutY="147.0" text="Que souhaitez-vous faire ?" textFill="WHITE">
+      <Label layoutX="255.0" layoutY="147.0" styleClass="title" text="Que souhaitez-vous faire ?" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
