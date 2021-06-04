@@ -31,12 +31,12 @@
       <Label layoutX="310.0" layoutY="398.0" text="Caractère d'occultation" />
       <CheckBox layoutX="310.0" layoutY="423.0" mnemonicParsing="false" text="Sensibilité à la casse" />
       <ComboBox layoutX="439.0" layoutY="394.0" prefHeight="25.0" prefWidth="27.0" promptText="#" />
-      <ImageView fx:id="optIcon" fitHeight="25.0" fitWidth="21.0" layoutX="580.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="25.0" fitWidth="21.0" layoutX="580.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/option.png" />
          </image>
       </ImageView>
-      <Hyperlink fx:id="optLink" layoutX="608.0" layoutY="363.0" text="Options" />
+      <Hyperlink layoutX="608.0" layoutY="363.0" onAction="#openOpt" text="Options" />
       <Rectangle fx:id="addMedia" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="309.0" layoutX="395.0" layoutY="17.0" stroke="BLACK" strokeType="INSIDE" width="309.0" />
       <Button layoutX="25.0" layoutY="403.0" mnemonicParsing="false" onAction="#homeButton" text="Accueil" />
    </children>
