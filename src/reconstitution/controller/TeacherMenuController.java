@@ -39,7 +39,13 @@ public class TeacherMenuController implements Initializable {
                 e.printStackTrace();
             }
         });
-        correctExercise.setOnMouseClicked(mouseEvent -> correction());
+        correctExercise.setOnMouseClicked(mouseEvent -> {
+            try {
+                correction();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void newExercise() throws IOException {
@@ -54,7 +60,8 @@ public class TeacherMenuController implements Initializable {
         System.out.println("evaluation");
     }
 
-    public void correction() {
+    public void correction() throws IOException {
+        MainTeacher.setView("/view/teacherCorrectView.fxml");
         System.out.println("correct");
     }
 
