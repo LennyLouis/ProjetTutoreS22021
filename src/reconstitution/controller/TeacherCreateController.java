@@ -21,6 +21,8 @@ import java.util.ResourceBundle;
 
 public class TeacherCreateController implements Initializable {
 
+    private static Stage menuOption;
+
     @FXML
     AnchorPane anchorPane;
 
@@ -32,6 +34,8 @@ public class TeacherCreateController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        createOptionStage();
+
         addMedia.setOnMouseClicked(mouseEvent -> openMedia());
         if(!TeacherMenuController.isEvaluation()){
             anchorPane.getChildren().removeAll(evaluationTime);
@@ -45,16 +49,32 @@ public class TeacherCreateController implements Initializable {
 
     @FXML
     public void openOpt() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/teacherOptionMenuView.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Options");
-        stage.setScene(new Scene(root, 450, 150));
-        stage.show();
+        if(menuOption.isShowing()){
+            menuOption.close();
+        }
+        menuOption.show();
     }
 
     public void openMedia(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir un média");
         fileChooser.showOpenDialog(MainTeacher.getStage());
+    }
+
+    public void createOptionStage(){
+        menuOption = new Stage();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/view/teacherOptionMenuView.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        menuOption.setTitle("Options");
+        menuOption.setScene(new Scene(root, 441, 161));
+        menuOption.setResizable(false);
+    }
+
+    public static Stage getMenuOption() {
+        return menuOption;
     }
 }
