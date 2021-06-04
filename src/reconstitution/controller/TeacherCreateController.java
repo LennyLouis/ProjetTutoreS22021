@@ -47,7 +47,7 @@ public class TeacherCreateController implements Initializable {
     public void openOpt() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/teacherOptionMenuView.fxml"));
         Stage stage = new Stage();
-        stage.setTitle("My New Stage Title");
+        stage.setTitle("Options");
         stage.setScene(new Scene(root, 450, 150));
         stage.show();
     }
