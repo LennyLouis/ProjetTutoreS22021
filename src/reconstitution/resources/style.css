@@ -5,3 +5,25 @@
 .title{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 12, 0, 0, 0);
 }
+
+.playPause {
+    -fx-background-color: transparent;
+    -fx-background-image: url('reconstitution/resources/images/play.png');
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+}
+
+.mute {
+    -fx-background-color: transparent;
+    -fx-background-image: url('reconstitution/resources/images/unmute.png');
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+}
+
+.playPause.white {
+    -fx-background-image: url('reconstitution/resources/images/play-white.png');
+}
+
+.mute.white {
+    -fx-background-image: url('reconstitution/resources/images/unmute-white.png');
+}
