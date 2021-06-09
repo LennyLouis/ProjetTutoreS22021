@@ -7,6 +7,7 @@ public class Texte {
 	private int nbMaxMots;
 	private int nbMotsDecouv;
 	private int nbMotsTotal;
+	private int mode;
 	private boolean sensiCasse;
 
 	//Constructeur
@@ -102,26 +103,113 @@ public class Texte {
 	}
 
 	void entrerMotEtu(String mot) {
-		if(isSensiCasse()) {
-			for(int i = 0; i < nbMaxMots; i++) {
-				if(texteClair[i] == mot) {
-					texteOccult[i] = texteClair[i];
-				}
-			}
-		}
-		else {
-			for(int i = 0; i < nbMaxMots; i++) {
-				boolean identique = true;
-				for(int a = 0; a < mot.length(); a++) {
-					if(mot.toLowerCase() != texteClair[i].toLowerCase()) {
-						identique = false;
+		switch(mode) {
+			case 1: 							//Mot incomplet désactivé
+				if(isSensiCasse()) {
+					for(int i = 0; i < nbMaxMots; i++) {
+						if(texteClair[i] == mot) {
+							texteOccult[i] = texteClair[i];
+						}
 					}
 				}
-				if(identique) {
-					texteOccult[i] = texteClair[i];
+				else {
+					for(int i = 0; i < nbMaxMots; i++) {
+						boolean identique = true;
+						for(int a = 0; a < mot.length(); a++) {
+							if(mot.toLowerCase() != texteClair[i].toLowerCase()) {
+								identique = false;
+							}
+						}
+						if(identique) {
+							texteOccult[i] = texteClair[i];
+						}
+					}
 				}
-			}
+
+				break;
+
+			case 2:								//Mot incomplet 2 lettres
+				if(isSensiCasse()) {
+					for(int i = 0; i < nbMaxMots; i++) {
+						if(texteClair[i].length() >= mot.length()) {
+							if(texteClair[i].length() >= 2 && mot.length() >= 2) {
+								for(int a = 0; a < mot.length(); a++) {
+									if(texteClair[i].charAt(a) == mot.charAt(a)) {
+										texteOccult[i] = texteClair[i];
+									}
+								}
+							}else {
+								if(texteClair[i] == mot) {
+									texteOccult[i] = texteClair[i];
+								}
+							}
+						}
+					}
+				}
+				else {
+					for(int i = 0; i < nbMaxMots; i++) {
+						boolean identique = true;
+						if(mot.length() >= 2 && texteClair[i].length() >= 2) {
+							for(int a = 0; a < mot.length(); a++) {
+								if(mot.toLowerCase().charAt(a) != texteClair[i].toLowerCase().charAt(a)) {
+									identique = false;
+								}
+							}
+							if(identique) {
+								texteOccult[i] = texteClair[i];
+							}
+						}else {
+							if(texteClair[i].toLowerCase() == mot.toLowerCase()) {
+								texteOccult[i] = texteClair[i];
+							}
+						}
+					}
+				}
+
+				break;
+
+			case 3:								//Mot incomplet 2 lettres
+				if(isSensiCasse()) {
+					for(int i = 0; i < nbMaxMots; i++) {
+						if(texteClair[i].length() >= mot.length()) {
+							if(texteClair[i].length() >= 3 && mot.length() >= 3) {
+								for(int a = 0; a < mot.length(); a++) {
+									if(texteClair[i].charAt(a) == mot.charAt(a)) {
+										texteOccult[i] = texteClair[i];
+									}
+								}
+							}else {
+								if(texteClair[i] == mot) {
+									texteOccult[i] = texteClair[i];
+								}
+							}
+						}
+					}
+				}
+				else {
+					for(int i = 0; i < nbMaxMots; i++) {
+						boolean identique = true;
+						if(mot.length() >= 3 && texteClair[i].length() >= 3) {
+							for(int a = 0; a < mot.length(); a++) {
+								if(mot.toLowerCase().charAt(a) != texteClair[i].toLowerCase().charAt(a)) {
+									identique = false;
+								}
+							}
+							if(identique) {
+								texteOccult[i] = texteClair[i];
+							}
+						}else {
+							if(texteClair[i].toLowerCase() == mot.toLowerCase()) {
+								texteOccult[i] = texteClair[i];
+							}
+						}
+					}
+				}
+
+				break;
 		}
+
 	}
+
 
 }
