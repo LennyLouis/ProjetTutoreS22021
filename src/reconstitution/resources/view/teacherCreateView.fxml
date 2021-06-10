@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -23,10 +20,6 @@
       <Button layoutX="579.0" layoutY="394.0" mnemonicParsing="false" text="Importer un exercice" />
       <Button layoutX="580.0" layoutY="427.0" mnemonicParsing="false" text="Enregistrer l'exercice" />
       <TextArea layoutX="93.0" layoutY="368.0" prefHeight="94.0" prefWidth="200.0" text="Saisir une consigne d'évaluation" />
-      <Label fx:id="evaluationTime" layoutX="310.0" layoutY="376.0" text="Durée de l'évaluation" />
-      <Label layoutX="310.0" layoutY="398.0" text="Caractère d'occultation" />
-      <CheckBox layoutX="310.0" layoutY="423.0" mnemonicParsing="false" text="Sensibilité à la casse" />
-      <ComboBox layoutX="439.0" layoutY="394.0" prefHeight="25.0" prefWidth="27.0" promptText="#" />
       <ImageView fitHeight="25.0" fitWidth="21.0" layoutX="580.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/option.png" />
