@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import reconstitution.MainTeacher;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -59,13 +60,9 @@ public class TeacherCreateController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createOptionStage();
 
-        addMedia.setOnMouseClicked(mouseEvent -> openMedia());
         if(!TeacherMenuController.isEvaluation()){
             anchorPane.getChildren().removeAll(evaluationTime);
-        }
-        uploadLogo.setOnMouseClicked(mouseEvent -> openMedia());
-        if(!TeacherMenuController.isEvaluation()){
-            anchorPane.getChildren().removeAll(evaluationTime);
+            //ici tu retire tout les elements qui n'ont pas lieu d'être dans un entrainement
         }
     }
 
@@ -122,46 +119,51 @@ public class TeacherCreateController implements Initializable {
         fileChooser.setTitle("Choisir un média");
         //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
         File file = fileChooser.showOpenDialog(MainTeacher.getStage());
+        if(file!=null) {
+            try {
+                mediaPlayer = new MediaPlayer(new Media(file.toURI().toString()));
+            } catch (Exception e) {
+                System.err.println("Le fichier selectionné n'est pas un média ! Merci de choisir un fichier approprié.");
+                openMedia();
+                return;
+            }
+            player.getChildren().remove(addMedia);
+            anchorPane.getChildren().remove(uploadLogo);
 
-        player.getChildren().remove(addMedia);
-        anchorPane.getChildren().remove(uploadLogo);
+            HBox hbox = new HBox();
 
-        HBox hbox = new HBox();
+            ProgressBar mediaProgressBar = new ProgressBar();
 
-        ProgressBar mediaProgressBar = new ProgressBar();
+            playPauseButton = new Button();
 
-        playPauseButton = new Button();
+            playPauseButton.getStyleClass().addAll("playPause", "white");
+            playPauseButton.setOnAction(actionEvent -> playPause());
+            playPauseButton.setPrefWidth(25.0);
 
-        playPauseButton.getStyleClass().addAll("playPause","white");
-        playPauseButton.setOnAction(actionEvent -> playPause());
-        playPauseButton.setPrefWidth(25.0);
+            muteButton = new Button();
 
-        muteButton = new Button();
+            muteButton.getStyleClass().addAll("mute", "white");
+            muteButton.setOnAction(actionEvent -> mute());
+            muteButton.setPrefWidth(25.0);
 
-        muteButton.getStyleClass().addAll("mute","white");
-        muteButton.setOnAction(actionEvent -> mute());
-        muteButton.setPrefWidth(25.0);
+            mediaProgressBar.setPrefHeight(26.0);
+            mediaProgressBar.setOnMouseClicked(mouseEvent -> {
+                setMediaCursor(mouseEvent.getX() / mediaProgressBar.getWidth());
+            });
+            mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
+                mediaProgressBar.setProgress(getPercentage(mediaPlayer));
+            });
 
-        mediaProgressBar.setPrefHeight(26.0);
-        mediaProgressBar.setOnMouseClicked(mouseEvent -> {
-            setMediaCursor(mouseEvent.getX()/mediaProgressBar.getWidth());
-        });
+            MediaView mv = new MediaView();
+            mv.setMediaPlayer(mediaPlayer);
+            mv.setFitWidth(308.0);
+            mv.setOnMouseClicked(mouseEvent -> playPause());
 
-        mediaPlayer = new MediaPlayer(new Media(file.toURI().toString()));
-        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue)->{
-            mediaProgressBar.setProgress(getPercentage(mediaPlayer));
-        });
+            mediaProgressBar.setPrefWidth(mv.getFitWidth() - playPauseButton.getWidth() - muteButton.getWidth() - 2);
 
-        MediaView mv = new MediaView();
-        mv.setMediaPlayer(mediaPlayer);
-        mv.setFitWidth(308.0);
-        mv.setOnMouseClicked(mouseEvent -> playPause());
-
-        mediaProgressBar.setPrefWidth(mv.getFitWidth()-playPauseButton.getWidth()-muteButton.getWidth()-2);
-
-        hbox.getChildren().addAll(playPauseButton, mediaProgressBar, muteButton);
-        player.getChildren().addAll(mv, hbox);
-
+            hbox.getChildren().addAll(playPauseButton, mediaProgressBar, muteButton);
+            player.getChildren().addAll(mv, hbox);
+        }
     }
 
     public void createOptionStage(){
