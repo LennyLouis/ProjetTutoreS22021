@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -39,7 +38,5 @@
       </ImageView>
       <Button layoutX="25.0" layoutY="403.0" mnemonicParsing="false" onAction="#homeButton" text="Accueil" />
       <TextArea fx:id="aide" layoutX="310.0" layoutY="368.0" prefHeight="94.0" prefWidth="200.0" text="Saisir une aide" />
-      <Label fx:id="temps" layoutX="310.0" layoutY="366.0" text="Temps restant :" />
-      <Label fx:id="tempsMin" layoutX="396.0" layoutY="366.0" text="00:00" />
    </children>
 </AnchorPane>
