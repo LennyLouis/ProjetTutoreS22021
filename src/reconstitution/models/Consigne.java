@@ -1,6 +1,8 @@
 package reconstitution.models;
 
-public class Consigne {
+import java.io.Serializable;
+
+public class Consigne implements Serializable {
 	private String contenu;
 
 	//Constrcteur

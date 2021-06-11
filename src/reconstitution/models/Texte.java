@@ -1,6 +1,8 @@
 package reconstitution.models;
 
-public class Texte {
+import java.io.Serializable;
+
+public class Texte implements Serializable {
 	private String texteOccult[];
 	private String texteClair[];
 	private char occultChar;

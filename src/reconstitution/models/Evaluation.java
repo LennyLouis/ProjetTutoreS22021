@@ -1,6 +1,8 @@
 package reconstitution.models;
 
-public class Evaluation extends Exercice{
+import java.io.Serializable;
+
+public class Evaluation extends Exercice implements Serializable {
 	private int duree;
 
 	//Constructeur

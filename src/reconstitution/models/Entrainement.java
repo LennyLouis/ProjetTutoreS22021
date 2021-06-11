@@ -1,6 +1,8 @@
 package reconstitution.models;
 
-public class Entrainement extends Exercice{
+import java.io.Serializable;
+
+public class Entrainement extends Exercice implements Serializable {
 	private Aide aide;
 
 	//Constructeurs

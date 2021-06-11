@@ -7,8 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 import reconstitution.MainStudent;
+import reconstitution.MainTeacher;
+import reconstitution.models.Exercice;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +20,7 @@ import java.util.ResourceBundle;
 public class StudentHomeController implements Initializable {
 
     private static Scene scene;
+    public static Exercice exo;
     @FXML
     Rectangle blackPane;
     @FXML
@@ -23,7 +28,19 @@ public class StudentHomeController implements Initializable {
 
     @FXML
     public void launchApp() throws IOException {
-        MainStudent.setView("/view/studentMainView.fxml");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir un exercice");
+        //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
+        File file = fileChooser.showOpenDialog(MainTeacher.getStage());
+        if(file!=null) {
+            try {
+                exo = (Exercice) Exercice.ouvrir(file.getAbsolutePath());
+            } catch (Exception e){
+                e.printStackTrace();
+                return;
+            }
+            MainStudent.setView("/view/studentMainView.fxml");
+        }
     }
 
     @FXML

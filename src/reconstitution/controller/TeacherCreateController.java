@@ -24,6 +24,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import reconstitution.MainTeacher;
+import reconstitution.models.Entrainement;
+import reconstitution.models.Evaluation;
+import reconstitution.models.Exercice;
 
 import javax.swing.*;
 import java.io.File;
@@ -43,6 +46,7 @@ public class TeacherCreateController implements Initializable {
     private Button playPauseButton;
     private Button muteButton;
     private MediaPlayer mediaPlayer;
+    private Exercice exo;
 
     @FXML
     AnchorPane anchorPane;
@@ -64,8 +68,11 @@ public class TeacherCreateController implements Initializable {
         createOptionStage();
 
         if(!TeacherMenuController.isEvaluation()){
+            exo = new Entrainement();
             anchorPane.getChildren().removeAll(evaluationTime);
             //ici tu retire tout les elements qui n'ont pas lieu d'être dans un entrainement
+        } else {
+            exo = new Evaluation();
         }
     }
 
@@ -83,6 +90,19 @@ public class TeacherCreateController implements Initializable {
     }
 
     @FXML
+    public void saveExercise(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sauvegarder votre exercice");
+        //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
+        File file = fileChooser.showSaveDialog(MainTeacher.getStage());
+        if(file!=null) {
+            Exercice.sauvegarder(exo, file.getAbsolutePath());
+            //TODO: faire une fenêtre disant que la sauvegarde s'est bien passé
+        }
+    }
+
+    @SuppressWarnings("all")
+    @FXML
     public void playPause() {
         if (playPauseSwitch) {
             mediaPlayer.play();
@@ -94,6 +114,7 @@ public class TeacherCreateController implements Initializable {
         playPauseSwitch = !playPauseSwitch;
     }
 
+    @SuppressWarnings("all")
     @FXML
     public void mute(){
         mediaPlayer.setMute(muteSwitch);
@@ -117,7 +138,7 @@ public class TeacherCreateController implements Initializable {
         return time/duration;
     }
 
-    public void openMedia(){
+    public void openMedia() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir un média");
         //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
@@ -130,13 +151,14 @@ public class TeacherCreateController implements Initializable {
                 openMedia();
                 return;
             }
+            exo.setMedia(new reconstitution.models.Media(file.toURI()));
             player.getChildren().remove(addMedia);
             anchorPane.getChildren().remove(uploadLogo);
 
             HBox hbox = new HBox();
             StackPane stackPane = new StackPane();
-            ProgressBar mediaProgressBar = new ProgressBar();
-            Label mediaTime = new Label();
+            ProgressBar mediaProgressBar = new ProgressBar(0);
+            Label mediaTime = new Label(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
 
             playPauseButton = new Button();
 

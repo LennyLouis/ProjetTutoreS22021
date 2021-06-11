@@ -7,8 +7,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
+import reconstitution.models.Exercice;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -19,6 +24,7 @@ public class StudentMainController implements Initializable {
     private static boolean muteSwitch = false;
 
     private MediaPlayer mediaPlayer;
+    private Exercice exo;
 
     @FXML
     ProgressBar mediaProgressBar;
@@ -40,9 +46,19 @@ public class StudentMainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String MEDIA_URL = "file:/C:/Users/lennylouis/Downloads/phone.mp3";
+        exo = StudentHomeController.exo;
+        File tempFile = null;
+        try {
 
-        mediaPlayer = new MediaPlayer(new Media(MEDIA_URL));
+            tempFile = File.createTempFile("reconstitution-video-temp", ".bin");
+            try (FileOutputStream fos = new FileOutputStream(tempFile.getAbsolutePath())) {
+                fos.write(exo.getMedia().getMediaByte());
+                //fos.close(); There is no more need for this line since you had created the instance of "fos" inside the try. And this will automatically close the OutputStream
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mediaPlayer = new MediaPlayer(new Media(tempFile.toURI().toString()));
 
         mediaView.setMediaPlayer(mediaPlayer);
         mediaView.setOnMouseClicked(mouseEvent -> playPause());
@@ -73,6 +89,7 @@ public class StudentMainController implements Initializable {
         return time/duration;
     }
 
+    @SuppressWarnings("all")
     @FXML
     public void playPause() {
         if (playPauseSwitch) {
@@ -85,6 +102,7 @@ public class StudentMainController implements Initializable {
         playPauseSwitch = !playPauseSwitch;
     }
 
+    @SuppressWarnings("all")
     @FXML
     public void mute(){
         mediaPlayer.setMute(muteSwitch);

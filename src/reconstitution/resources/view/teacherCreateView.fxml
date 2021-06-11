@@ -18,7 +18,7 @@
       </ImageView>
       <TextArea layoutX="14.0" layoutY="17.0" prefHeight="309.0" prefWidth="325.0" />
       <Button layoutX="579.0" layoutY="394.0" mnemonicParsing="false" text="Importer un exercice" />
-      <Button layoutX="580.0" layoutY="427.0" mnemonicParsing="false" text="Enregistrer l'exercice" />
+      <Button layoutX="580.0" layoutY="427.0" mnemonicParsing="false" onAction="#saveExercise" text="Enregistrer l'exercice" />
       <TextArea layoutX="93.0" layoutY="368.0" prefHeight="94.0" prefWidth="200.0" text="Saisir une consigne d'évaluation" />
       <ImageView fitHeight="25.0" fitWidth="21.0" layoutX="580.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
          <image>

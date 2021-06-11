@@ -1,6 +1,8 @@
 package reconstitution.models;
 
-public class Aide {
+import java.io.Serializable;
+
+public class Aide implements Serializable {
 	private String contenu;
 	
 	//Constructeur

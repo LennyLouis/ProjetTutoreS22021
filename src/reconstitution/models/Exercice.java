@@ -1,9 +1,8 @@
 package reconstitution.models;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
-public class Exercice {
+public class Exercice implements Serializable {
 	private String titre;
 	private Texte texte;
 	private Media media;
@@ -53,9 +52,9 @@ public class Exercice {
 	}
 	
 	//Methodes
-	public void sauvegarder(Exercice exercice, String nomFichier) {
+	public static void sauvegarder(Exercice exercice, String path) {
 		try {
-            FileOutputStream file = new FileOutputStream(nomFichier);
+            FileOutputStream file = new FileOutputStream(path);
             ObjectOutputStream object = new ObjectOutputStream(file);
             object.writeObject(exercice);
             object.close();
@@ -63,6 +62,20 @@ public class Exercice {
         } catch (Exception e) {
             e.printStackTrace();
         }
+	}
+
+	public static Object ouvrir(String path) throws IOException {
+		Object o = null;
+
+		try (ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream(path))) {
+			o = objectInput.readObject();
+		} catch (EOFException eof) {
+			System.out.println("Ce fichier n'est pas un fichier d'exercice.");
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+
+		return o;
 	}
 	
 	
