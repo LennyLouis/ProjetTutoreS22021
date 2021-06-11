@@ -27,6 +27,7 @@ import reconstitution.MainTeacher;
 import reconstitution.models.Entrainement;
 import reconstitution.models.Evaluation;
 import reconstitution.models.Exercice;
+import reconstitution.models.Texte;
 
 import javax.swing.*;
 import java.io.File;
@@ -38,15 +39,22 @@ import java.util.ResourceBundle;
 
 public class TeacherCreateController implements Initializable {
 
+    // Media player
     private static boolean playPauseSwitch = false;
     private static boolean muteSwitch = false;
 
     private static Stage menuOption;
 
+    // JavaFX Nodes
     private Button playPauseButton;
     private Button muteButton;
     private MediaPlayer mediaPlayer;
     private Exercice exo;
+
+    // Options
+    private static boolean caseSensitivVar, timeLimitVar, showSolutionVar, realTimeVar;
+    private static char occultCharVar;
+    private static int timeLimitValueVar, lettersMotVar;
 
     @FXML
     AnchorPane anchorPane;
@@ -66,6 +74,7 @@ public class TeacherCreateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createOptionStage();
+        initOptions();
 
         if(!TeacherMenuController.isEvaluation()){
             exo = new Entrainement();
@@ -96,6 +105,8 @@ public class TeacherCreateController implements Initializable {
         //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
         File file = fileChooser.showSaveDialog(MainTeacher.getStage());
         if(file!=null) {
+            Texte texte = new Texte(occultCharVar, false);
+            //texte.setMode();
             Exercice.sauvegarder(exo, file.getAbsolutePath());
             //TODO: faire une fenêtre disant que la sauvegarde s'est bien passé
         }
@@ -200,6 +211,16 @@ public class TeacherCreateController implements Initializable {
         }
     }
 
+    public void initOptions(){
+        caseSensitivVar = false;
+        timeLimitVar = false;
+        showSolutionVar = false;
+        realTimeVar = false;
+        occultCharVar = '#';
+        timeLimitValueVar = 0;
+        lettersMotVar = 0;
+    }
+
     public void createOptionStage(){
         menuOption = new Stage();
         Parent root = null;
@@ -215,5 +236,33 @@ public class TeacherCreateController implements Initializable {
 
     public static Stage getMenuOption() {
         return menuOption;
+    }
+
+    public static void setCaseSensitivVar(boolean caseSensitivVar) {
+        TeacherCreateController.caseSensitivVar = caseSensitivVar;
+    }
+
+    public static void setTimeLimitVar(boolean timeLimitVar) {
+        TeacherCreateController.timeLimitVar = timeLimitVar;
+    }
+
+    public static void setShowSolutionVar(boolean showSolutionVar) {
+        TeacherCreateController.showSolutionVar = showSolutionVar;
+    }
+
+    public static void setRealTimeVar(boolean realTimeVar) {
+        TeacherCreateController.realTimeVar = realTimeVar;
+    }
+
+    public static void setOccultCharVar(char occultCharVar) {
+        TeacherCreateController.occultCharVar = occultCharVar;
+    }
+
+    public static void setTimeLimitValueVar(int timeLimitValueVar) {
+        TeacherCreateController.timeLimitValueVar = timeLimitValueVar;
+    }
+
+    public static void setLettersMotVar(int lettersMotVar) {
+        TeacherCreateController.lettersMotVar = lettersMotVar;
     }
 }

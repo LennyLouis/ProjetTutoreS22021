@@ -13,7 +13,7 @@ public class Texte implements Serializable {
 	private boolean sensiCasse;
 
 	//Constructeur
-	public Texte(char occultChar, int nbMaxMots, int nbMotsDecouv, int nbMotsTotal, boolean sensiCasse) {
+	public Texte(char occultChar, boolean sensiCasse) {
 		super();
 		this.occultChar = occultChar;
 		this.nbMaxMots = nbMaxMots;
@@ -22,47 +22,6 @@ public class Texte implements Serializable {
 		this.sensiCasse = sensiCasse;
 		this.texteOccult = new String[nbMaxMots];
 		this.texteClair = new String[nbMaxMots];
-	}
-
-	//Setters & Getters
-	public String[] getTextOccult() {
-		return texteOccult;
-	}
-
-	public int getNbMaxMots() {
-		return nbMaxMots;
-	}
-
-	public char getOccultChar() {
-		return occultChar;
-	}
-
-	public int getNbMotsDecouv() {
-		return nbMotsDecouv;
-	}
-
-	public int getNbMotsTotal() {
-		return nbMotsTotal;
-	}
-
-	public boolean isSensiCasse() {
-		return sensiCasse;
-	}
-
-	public void setNbMaxMots(int nbMaxMots) {
-		this.nbMaxMots = nbMaxMots;
-	}
-
-	public void setOccultChar(char occulChar) {
-		this.occultChar = occulChar;
-	}
-
-	public void setNbMotsTotal(int nbMotsTotal) {
-		this.nbMotsTotal = nbMotsTotal;
-	}
-
-	public void setSensiCasse(boolean sensiCasse) {
-		this.sensiCasse = sensiCasse;
 	}
 
 	//Methodes
@@ -213,5 +172,48 @@ public class Texte implements Serializable {
 
 	}
 
+	//Setters & Getters
+	public String[] getTextOccult() {
+		return texteOccult;
+	}
 
+	public int getNbMaxMots() {
+		return nbMaxMots;
+	}
+
+	public char getOccultChar() {
+		return occultChar;
+	}
+
+	public int getNbMotsDecouv() {
+		return nbMotsDecouv;
+	}
+
+	public int getNbMotsTotal() {
+		return nbMotsTotal;
+	}
+
+	public boolean isSensiCasse() {
+		return sensiCasse;
+	}
+
+	public void setNbMaxMots(int nbMaxMots) {
+		this.nbMaxMots = nbMaxMots;
+	}
+
+	public void setOccultChar(char occulChar) {
+		this.occultChar = occulChar;
+	}
+
+	public void setNbMotsTotal(int nbMotsTotal) {
+		this.nbMotsTotal = nbMotsTotal;
+	}
+
+	public void setSensiCasse(boolean sensiCasse) {
+		this.sensiCasse = sensiCasse;
+	}
+
+	public void setMode(int mode) {
+		this.mode = mode;
+	}
 }

@@ -12,7 +12,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reconstitution.controller.TeacherOptionMenuController">
     <children>
-        <VBox>
+        <VBox prefHeight="143.0" prefWidth="441.0">
             <children>
                 <HBox prefHeight="0.0" prefWidth="441.0">
                     <children>
@@ -21,7 +21,7 @@
                                 <Insets left="10.0" />
                             </HBox.margin>
                         </Label>
-                        <ComboBox prefHeight="25.0" prefWidth="34.0" promptText="#">
+                        <ComboBox fx:id="occultChar" prefHeight="25.0" prefWidth="34.0" promptText="#">
                             <HBox.margin>
                                 <Insets left="20.0" />
                             </HBox.margin>
@@ -36,7 +36,7 @@
                 </HBox>
             <HBox prefHeight="0.0" prefWidth="441.0">
                <children>
-                  <CheckBox mnemonicParsing="false">
+                  <CheckBox fx:id="caseSensitiv" mnemonicParsing="false">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -53,7 +53,7 @@
             </HBox>
             <HBox prefHeight="0.0" prefWidth="441.0">
                <children>
-                  <CheckBox mnemonicParsing="false">
+                  <CheckBox fx:id="timeLimit" mnemonicParsing="false">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -63,7 +63,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="30.0">
+                  <TextField fx:id="timeLimitValue" prefHeight="25.0" prefWidth="30.0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -85,7 +85,7 @@
                                 <Insets left="290.0" />
                             </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#validate" text="Valider">
+                        <Button mnemonicParsing="false" onAction="#validateEval" text="Valider">
                             <HBox.margin>
                                 <Insets left="20.0" />
                             </HBox.margin>

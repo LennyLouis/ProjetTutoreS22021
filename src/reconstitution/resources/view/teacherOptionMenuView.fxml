@@ -13,7 +13,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reconstitution.controller.TeacherOptionMenuController">
    <children>
-      <VBox>
+      <VBox prefHeight="179.0" prefWidth="441.0">
          <children>
             <HBox prefHeight="0.0" prefWidth="441.0">
                <children>
@@ -22,7 +22,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox prefHeight="25.0" prefWidth="34.0" promptText="#">
+                  <ComboBox fx:id="occultChar" prefHeight="25.0" prefWidth="34.0" promptText="#">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -37,7 +37,7 @@
             </HBox>
             <HBox prefHeight="0.0" prefWidth="441.0">
                <children>
-                  <CheckBox mnemonicParsing="false">
+                  <CheckBox fx:id="caseSensitiv" mnemonicParsing="false">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -56,7 +56,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <RadioButton mnemonicParsing="false" selected="true" text="Désactiver">
+                  <RadioButton fx:id="disableMot" mnemonicParsing="false" selected="true" text="Désactiver">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
@@ -64,12 +64,12 @@
                         <ToggleGroup fx:id="letters" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="3 lettres" toggleGroup="$letters">
+                  <RadioButton fx:id="threeLettersMot" mnemonicParsing="false" text="3 lettres" toggleGroup="$letters">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="2 lettres" toggleGroup="$letters">
+                  <RadioButton fx:id="twoLettersMot" mnemonicParsing="false" text="2 lettres" toggleGroup="$letters">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
@@ -94,12 +94,12 @@
                      <children>
                         <VBox>
                            <children>
-                              <CheckBox mnemonicParsing="false" text="Affichage de la solution">
+                              <CheckBox fx:id="showSolution" mnemonicParsing="false" text="Affichage de la solution">
                                  <VBox.margin>
                                     <Insets left="10.0" top="10.0" />
                                  </VBox.margin>
                               </CheckBox>
-                              <CheckBox mnemonicParsing="false" text="Affichage en temps réel du nombre de mots découverts">
+                              <CheckBox fx:id="realTime" mnemonicParsing="false" text="Affichage en temps réel du nombre de mots découverts">
                                  <VBox.margin>
                                     <Insets left="10.0" top="10.0" />
                                  </VBox.margin>
@@ -117,7 +117,7 @@
                         <Insets left="290.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#validate" text="Valider">
+                  <Button mnemonicParsing="false" onAction="#validateEntr" text="Valider">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
