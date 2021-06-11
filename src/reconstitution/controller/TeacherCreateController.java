@@ -14,6 +14,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -28,6 +29,8 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class TeacherCreateController implements Initializable {
@@ -131,8 +134,9 @@ public class TeacherCreateController implements Initializable {
             anchorPane.getChildren().remove(uploadLogo);
 
             HBox hbox = new HBox();
-
+            StackPane stackPane = new StackPane();
             ProgressBar mediaProgressBar = new ProgressBar();
+            Label mediaTime = new Label();
 
             playPauseButton = new Button();
 
@@ -150,8 +154,13 @@ public class TeacherCreateController implements Initializable {
             mediaProgressBar.setOnMouseClicked(mouseEvent -> {
                 setMediaCursor(mouseEvent.getX() / mediaProgressBar.getWidth());
             });
-            mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
+            mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue)->{
                 mediaProgressBar.setProgress(getPercentage(mediaPlayer));
+                mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
+            });
+            mediaTime.setOnMouseClicked(mouseEvent -> {
+                double padding = (mediaProgressBar.getWidth()-mediaTime.getWidth())/2;
+                setMediaCursor((mouseEvent.getX()+padding)/mediaProgressBar.getWidth());
             });
 
             MediaView mv = new MediaView();
@@ -161,7 +170,10 @@ public class TeacherCreateController implements Initializable {
 
             mediaProgressBar.setPrefWidth(mv.getFitWidth() - playPauseButton.getWidth() - muteButton.getWidth() - 2);
 
-            hbox.getChildren().addAll(playPauseButton, mediaProgressBar, muteButton);
+            stackPane.setPrefWidth(mediaProgressBar.getPrefWidth());
+            stackPane.getChildren().addAll(mediaProgressBar, mediaTime);
+
+            hbox.getChildren().addAll(playPauseButton, stackPane, muteButton);
             player.getChildren().addAll(mv, hbox);
         }
     }

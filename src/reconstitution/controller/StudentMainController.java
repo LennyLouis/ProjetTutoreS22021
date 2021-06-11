@@ -9,6 +9,8 @@ import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class StudentMainController implements Initializable {
@@ -28,7 +30,7 @@ public class StudentMainController implements Initializable {
     TextArea mediaTextArea;
 
     @FXML
-    Label tempsRestant, consigne;
+    Label tempsRestant, consigne, mediaTime;
 
     @FXML
     MediaView mediaView;
@@ -38,18 +40,24 @@ public class StudentMainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String MEDIA_URL = "file:/C:/Users/lennylouis/Downloads/sample.mp4";
+        String MEDIA_URL = "file:/C:/Users/lennylouis/Downloads/phone.mp3";
 
         mediaPlayer = new MediaPlayer(new Media(MEDIA_URL));
 
         mediaView.setMediaPlayer(mediaPlayer);
         mediaView.setOnMouseClicked(mouseEvent -> playPause());
-        mediaProgressBar.setProgress(0.5);
+        mediaProgressBar.setProgress(0);
+        mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
         mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue)->{
             mediaProgressBar.setProgress(getPercentage(mediaPlayer));
+            mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
         });
         mediaProgressBar.setOnMouseClicked(mouseEvent -> {
             setMediaCursor(mouseEvent.getX()/mediaProgressBar.getWidth());
+        });
+        mediaTime.setOnMouseClicked(mouseEvent -> {
+            double padding = (mediaProgressBar.getWidth()-mediaTime.getWidth())/2;
+            setMediaCursor((mouseEvent.getX()+padding)/mediaProgressBar.getWidth());
         });
     }
 
