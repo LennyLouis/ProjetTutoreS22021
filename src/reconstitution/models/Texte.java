@@ -67,7 +67,7 @@ public class Texte implements Serializable {
 		switch(mode) {
 			case 1: 							//Mot incomplet désactivé
 				if(isSensiCasse()) {
-					for(int i = 0; i < nbMaxMots; i++) {
+					for(int i = 0; i < nbMotsTotal; i++) {
 						if(texteClair[i] == mot) {
 							texteOccult[i] = texteClair[i];
 						}
