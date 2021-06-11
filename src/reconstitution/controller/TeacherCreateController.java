@@ -82,7 +82,7 @@ public class TeacherCreateController implements Initializable {
             //ici tu retire tout les elements qui n'ont pas lieu d'être dans un entrainement
         } else{
             exo = new Evaluation();
-            aide.
+
             //anchorPane.getChildren().removeAll(aide);
         }
     }
