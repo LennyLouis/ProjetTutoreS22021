@@ -224,10 +224,18 @@ public class TeacherCreateController implements Initializable {
     public void createOptionStage(){
         menuOption = new Stage();
         Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/view/teacherOptionMenuView.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(TeacherMenuController.isEvaluation()) {
+            try {
+                root = FXMLLoader.load(getClass().getResource("/view/teacherOptionMenuEvaluationView.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                root = FXMLLoader.load(getClass().getResource("/view/teacherOptionMenuView.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         menuOption.setTitle("Options");
         menuOption.setScene(new Scene(root, 441, 161));
