@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reconstitution.controller.TeacherCreateController">
    <children>
-      <ImageView fitHeight="480.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="aide" fitHeight="480.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fonddec.png" />
          </image>
@@ -19,7 +19,7 @@
       <TextArea layoutX="14.0" layoutY="17.0" prefHeight="309.0" prefWidth="325.0" />
       <Button layoutX="579.0" layoutY="394.0" mnemonicParsing="false" text="Importer un exercice" />
       <Button layoutX="580.0" layoutY="427.0" mnemonicParsing="false" onAction="#saveExercise" text="Enregistrer l'exercice" />
-      <TextArea layoutX="93.0" layoutY="368.0" prefHeight="94.0" prefWidth="200.0" text="Saisir une consigne d'évaluation" />
+      <TextArea layoutX="93.0" layoutY="368.0" prefHeight="94.0" prefWidth="200.0" text="Saisir une consigne" />
       <ImageView fitHeight="25.0" fitWidth="21.0" layoutX="580.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/option.png" />
@@ -37,5 +37,6 @@
          </image>
       </ImageView>
       <Button layoutX="25.0" layoutY="403.0" mnemonicParsing="false" onAction="#homeButton" text="Accueil" />
+      <TextArea fx:id="aide" layoutX="310.0" layoutY="368.0" prefHeight="94.0" prefWidth="200.0" text="Saisir une aide" />
    </children>
 </AnchorPane>

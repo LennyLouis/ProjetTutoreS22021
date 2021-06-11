@@ -13,7 +13,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reconstitution.controller.TeacherOptionMenuController">
    <children>
-      <VBox prefHeight="179.0" prefWidth="441.0">
+      <VBox prefHeight="166.0" prefWidth="441.0">
          <children>
             <HBox prefHeight="0.0" prefWidth="441.0">
                <children>
@@ -124,7 +124,7 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets bottom="5.0" top="10.0" />
                </VBox.margin>
             </HBox>
          </children>

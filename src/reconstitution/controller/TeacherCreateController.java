@@ -7,10 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -71,6 +68,9 @@ public class TeacherCreateController implements Initializable {
     @FXML
     ImageView uploadLogo;
 
+    @FXML
+    TextArea aide;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createOptionStage();
@@ -80,8 +80,10 @@ public class TeacherCreateController implements Initializable {
             exo = new Entrainement();
             anchorPane.getChildren().removeAll(evaluationTime);
             //ici tu retire tout les elements qui n'ont pas lieu d'être dans un entrainement
-        } else {
+        } else{
             exo = new Evaluation();
+            aide.
+            //anchorPane.getChildren().removeAll(aide);
         }
     }
 
@@ -94,8 +96,9 @@ public class TeacherCreateController implements Initializable {
     public void openOpt() throws IOException {
         if(menuOption.isShowing()){
             menuOption.close();
+        }else {
+            menuOption.show();
         }
-        menuOption.show();
     }
 
     @FXML
@@ -238,7 +241,7 @@ public class TeacherCreateController implements Initializable {
             }
         }
         menuOption.setTitle("Options");
-        menuOption.setScene(new Scene(root, 441, 161));
+        menuOption.setScene(new Scene(root));
         menuOption.setResizable(false);
     }
 
