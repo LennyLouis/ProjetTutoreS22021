@@ -10,6 +10,12 @@ import java.util.ResourceBundle;
 
 public class TeacherCorrectController implements Initializable {
 
+
+    @FXML
+    public void homeButton() throws IOException {
+        MainTeacher.setView("/view/teacherMenuView.fxml");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

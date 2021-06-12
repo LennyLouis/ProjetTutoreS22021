@@ -65,7 +65,6 @@
       </Label>
       <TextArea layoutX="13.0" layoutY="197.0" prefHeight="246.0" prefWidth="248.0" />
       <TextArea layoutX="458.0" layoutY="195.0" prefHeight="246.0" prefWidth="248.0" />
-      <Button layoutX="14.0" layoutY="453.0" mnemonicParsing="false" text="Accueil" />
-      <Button layoutX="652.0" layoutY="453.0" mnemonicParsing="false" text="Quitter" />
+      <Button layoutX="14.0" layoutY="453.0" mnemonicParsing="false" onAction="#homeButton" text="Accueil" />
    </children>
 </AnchorPane>

@@ -15,6 +15,8 @@ public class MainTeacher extends Application {
 
     private static Stage stage;
 
+    private static int taillePolice;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
