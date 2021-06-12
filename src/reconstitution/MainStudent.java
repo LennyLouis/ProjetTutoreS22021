@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import reconstitution.controller.StudentHomeController;
+import reconstitution.controller.StudentMainController;
 
 import java.io.IOException;
 
@@ -24,6 +25,12 @@ public class MainStudent extends Application {
             System.out.println(screen.getBounds());
         });
         setView("/view/studentHomeView.fxml");
+    }
+
+    @Override
+    public void stop(){
+        // Stop le timer de la partie étudiant
+        StudentMainController.timer.cancel();
     }
 
 

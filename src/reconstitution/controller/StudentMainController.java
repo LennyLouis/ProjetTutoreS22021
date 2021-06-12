@@ -10,15 +10,14 @@ import javafx.util.Duration;
 import reconstitution.models.Evaluation;
 import reconstitution.models.Exercice;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.Timer;
 
 public class StudentMainController implements Initializable {
 
@@ -29,7 +28,9 @@ public class StudentMainController implements Initializable {
     private MediaPlayer mediaPlayer;
     private Exercice exo;
 
-    private Date compteur;
+    private Date dateDebutFin;
+    private long compteur;
+    public static Timer timer;
 
     @FXML
     ProgressBar mediaProgressBar;
@@ -52,21 +53,31 @@ public class StudentMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         exo = StudentHomeController.exo;
+        initMediaPlayer();
+
         if(exo instanceof Evaluation){
             evaluation = true; // TODO: Quelle utilité ?
-            Calendar c = Calendar.getInstance();
-            c.setTime(new Date());
-            c.add(Calendar.SECOND, ((Evaluation) exo).getDuree());
-            compteur = c.getTime();
-            time.setText("Temps restant : "+timeRemaining());
+            // Initialisation du timer
+            initTimeRemain();
+            // Mise a jour du timer
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    javafx.application.Platform.runLater(() -> updateTimeRemain());
+                }
+            }, 0, 1000);
+        } else {
+
         }
-        initMediaPlayer();
+        // Consigne
         consigne.setText("Consigne : "+exo.getConsigne());
+        // Script du média
         StringBuffer stringBuffer = new StringBuffer();
         for(int i = 0; i < exo.getTexte().getTexteClair().length; i++) {
             stringBuffer.append(exo.getTexte().getTexteClair()[i]);
         }
-        //mediaTextArea.setText(stringBuffer.toString());
+        mediaTextArea.setText(stringBuffer.toString());
     }
 
     public void setMediaCursor(Double time){
@@ -144,9 +155,16 @@ public class StudentMainController implements Initializable {
         });
     }
 
-    public String timeRemaining(){
+    public void initTimeRemain(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.MINUTE, ((Evaluation) exo).getDuree());
+        dateDebutFin = c.getTime();
+    }
 
-        return "";
+    public void updateTimeRemain(){
+        compteur = dateDebutFin.getTime()-new Date().getTime();
+        time.setText("Temps restant : "+new SimpleDateFormat("mm:ss").format(compteur));
     }
 
 }
