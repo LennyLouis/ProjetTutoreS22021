@@ -8,6 +8,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -27,6 +30,7 @@ import reconstitution.models.Exercice;
 import reconstitution.models.Texte;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -71,6 +75,9 @@ public class TeacherCreateController implements Initializable {
     @FXML
     TextArea aide;
 
+    @FXML
+    TextArea consigne, textClair;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createOptionStage();
@@ -108,9 +115,38 @@ public class TeacherCreateController implements Initializable {
         File file = fileChooser.showSaveDialog(MainTeacher.getStage());
         if(file!=null) {
             Texte texte = new Texte(occultCharVar, false);
-            //texte.setMode();
+            texte.setMode(lettersMotVar);
+            texte.setOccultChar(occultCharVar);
+            texte.setSensiCasse(caseSensitivVar);
+            texte.setTexteClair(textClair.getText());
+            exo.setTexte(texte);
+            exo.setConsigne(consigne.getText());
+            if(timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
+            //TODO: realTime
+            //TODO: showSolution
             Exercice.sauvegarder(exo, file.getAbsolutePath());
-            //TODO: faire une fenêtre disant que la sauvegarde s'est bien passé
+
+
+
+
+            Stage saveSuccess = new Stage();
+            AnchorPane ap = new AnchorPane();
+            Label label = new Label("Le sauvegarde a été réalisé avec succès.");
+            Button openFolder = new Button("Ouvrir le dossier");
+            Button ok = new Button("OK");
+            ok.setOnAction(e -> {saveSuccess.close();});
+            openFolder.setOnAction(e -> {
+                try {
+                    Desktop.getDesktop().open(file.getParentFile());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            });
+            ap.getChildren().addAll(label, openFolder, ok);
+            saveSuccess.setTitle("Sauvegarde réussie !");
+            saveSuccess.setScene(new Scene(ap, 400, 100));
+            saveSuccess.setResizable(false);
+            saveSuccess.show();
         }
     }
 

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -28,7 +29,7 @@ public class StudentMainController implements Initializable {
     private MediaPlayer mediaPlayer;
     private Exercice exo;
 
-    private int compteur;
+    private Date compteur;
 
     @FXML
     ProgressBar mediaProgressBar;
@@ -40,7 +41,7 @@ public class StudentMainController implements Initializable {
     TextArea mediaTextArea;
 
     @FXML
-    Label tempsRestant, consigne, mediaTime;
+    Label time, consigne, mediaTime;
 
     @FXML
     MediaView mediaView;
@@ -51,37 +52,21 @@ public class StudentMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         exo = StudentHomeController.exo;
-        if(!(exo instanceof Evaluation)){
-            evaluation = true;
+        if(exo instanceof Evaluation){
+            evaluation = true; // TODO: Quelle utilité ?
+            Calendar c = Calendar.getInstance();
+            c.setTime(new Date());
+            c.add(Calendar.SECOND, ((Evaluation) exo).getDuree());
+            compteur = c.getTime();
+            time.setText("Temps restant : "+timeRemaining());
         }
-        File tempFile = null;
-        try {
-
-            tempFile = File.createTempFile("reconstitution-video-temp", ".bin");
-            try (FileOutputStream fos = new FileOutputStream(tempFile.getAbsolutePath())) {
-                fos.write(exo.getMedia().getMediaByte());
-                //fos.close(); There is no more need for this line since you had created the instance of "fos" inside the try. And this will automatically close the OutputStream
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        initMediaPlayer();
+        consigne.setText("Consigne : "+exo.getConsigne());
+        StringBuffer stringBuffer = new StringBuffer();
+        for(int i = 0; i < exo.getTexte().getTexteClair().length; i++) {
+            stringBuffer.append(exo.getTexte().getTexteClair()[i]);
         }
-        mediaPlayer = new MediaPlayer(new Media(tempFile.toURI().toString()));
-
-        mediaView.setMediaPlayer(mediaPlayer);
-        mediaView.setOnMouseClicked(mouseEvent -> playPause());
-        mediaProgressBar.setProgress(0);
-        mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
-        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue)->{
-            mediaProgressBar.setProgress(getPercentage(mediaPlayer));
-            mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
-        });
-        mediaProgressBar.setOnMouseClicked(mouseEvent -> {
-            setMediaCursor(mouseEvent.getX()/mediaProgressBar.getWidth());
-        });
-        mediaTime.setOnMouseClicked(mouseEvent -> {
-            double padding = (mediaProgressBar.getWidth()-mediaTime.getWidth())/2;
-            setMediaCursor((mouseEvent.getX()+padding)/mediaProgressBar.getWidth());
-        });
+        //mediaTextArea.setText(stringBuffer.toString());
     }
 
     public void setMediaCursor(Double time){
@@ -124,6 +109,44 @@ public class StudentMainController implements Initializable {
     @FXML
     public void reponse(){
 
+    }
+
+    @FXML
+    public void initMediaPlayer(){
+        // Loading byte[] media into a temporary file
+        File tempFile = null;
+        try {
+            tempFile = File.createTempFile("reconstitution-video-temp", ".bin");
+            try (FileOutputStream fos = new FileOutputStream(tempFile.getAbsolutePath())) {
+                fos.write(exo.getMedia().getMediaByte());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Creating mediaPlayer
+        mediaPlayer = new MediaPlayer(new Media(tempFile.toURI().toString()));
+
+        // Creation mediaView
+        mediaView.setMediaPlayer(mediaPlayer);
+        mediaView.setOnMouseClicked(mouseEvent -> playPause());
+        mediaProgressBar.setProgress(0);
+        mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
+        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue)->{
+            mediaProgressBar.setProgress(getPercentage(mediaPlayer));
+            mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
+        });
+        mediaProgressBar.setOnMouseClicked(mouseEvent -> {
+            setMediaCursor(mouseEvent.getX()/mediaProgressBar.getWidth());
+        });
+        mediaTime.setOnMouseClicked(mouseEvent -> {
+            double padding = (mediaProgressBar.getWidth()-mediaTime.getWidth())/2;
+            setMediaCursor((mouseEvent.getX()+padding)/mediaProgressBar.getWidth());
+        });
+    }
+
+    public String timeRemaining(){
+
+        return "";
     }
 
 }

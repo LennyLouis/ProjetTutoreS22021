@@ -3,6 +3,8 @@ package reconstitution.models;
 import java.io.Serializable;
 
 public class Evaluation extends Exercice implements Serializable {
+
+	// Durée en minutes
 	private int duree;
 
 	//Constructeur

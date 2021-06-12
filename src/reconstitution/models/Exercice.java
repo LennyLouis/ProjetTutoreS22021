@@ -6,7 +6,7 @@ public class Exercice implements Serializable {
 	private String titre;
 	private Texte texte;
 	private Media media;
-	private Consigne consigne;
+	private String consigne;
 	
 	//Constructeurs
 	public Exercice() {
@@ -31,7 +31,7 @@ public class Exercice implements Serializable {
 		return titre;
 	}
 
-	public Consigne getConsigne() {
+	public String getConsigne() {
 		return consigne;
 	}
 
@@ -47,7 +47,7 @@ public class Exercice implements Serializable {
 		this.titre = titre;
 	}
 
-	public void setConsigne(Consigne consigne) {
+	public void setConsigne(String consigne) {
 		this.consigne = consigne;
 	}
 	

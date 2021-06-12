@@ -200,6 +200,10 @@ public class Texte implements Serializable {
 		return nbMotsTotal;
 	}
 
+	public String[] getTexteClair() {
+		return texteClair;
+	}
+
 	public boolean isSensiCasse() {
 		return sensiCasse;
 	}
@@ -222,5 +226,9 @@ public class Texte implements Serializable {
 
 	public void setMode(int mode) {
 		this.mode = mode;
+	}
+
+	public void setTexteClair(String texteClair) {
+		this.texteClair = texteClair.split(" "); //TODO: Faire un regex qui sépare correctement les bon mots
 	}
 }

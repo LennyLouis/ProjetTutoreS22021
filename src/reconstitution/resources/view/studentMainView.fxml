@@ -37,7 +37,7 @@
          </children>
       </HBox>
       <Label fx:id="consigne" alignment="TOP_LEFT" layoutX="25.0" layoutY="330.0" prefHeight="47.0" prefWidth="320.0" text="Consigne : " />
-      <Label fx:id="tempsRestant" layoutX="582.0" layoutY="330.0" text="Temps restant : 00:00" />
+      <Label fx:id="time" layoutX="582.0" layoutY="330.0" text="Temps restant : 00:00" />
       <VBox layoutX="25.0" layoutY="21.0" prefHeight="300.0" prefWidth="320.0">
          <children>
             <MediaView fx:id="mediaView" fitHeight="274.0" fitWidth="320.0">

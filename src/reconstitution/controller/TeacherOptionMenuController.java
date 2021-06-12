@@ -29,17 +29,16 @@ public class TeacherOptionMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        occultChar.getItems().addAll("#","-","_","~");
 
     }
 
     @FXML
-    public void validateEval(){
+    public void validateEntr(){
         setCaseSensitivVar(caseSensitiv.isSelected());
-        setTimeLimitVar(timeLimit.isSelected());
         setShowSolutionVar(showSolution.isSelected());
         setRealTimeVar(realTime.isSelected());
         setOccultCharVar(occultChar.getValue().toString().charAt(0));
-        setTimeLimitValueVar(Integer.parseInt(timeLimitValue.getText()));
         if(disableMot.isSelected()) setLettersMotVar(1);
         if(twoLettersMot.isSelected()) setLettersMotVar(2);
         if(threeLettersMot.isSelected()) setLettersMotVar(3);
@@ -47,7 +46,7 @@ public class TeacherOptionMenuController implements Initializable {
     }
 
     @FXML
-    public void validateEntr(){
+    public void validateEval(){
         setCaseSensitivVar(caseSensitiv.isSelected());
         setTimeLimitVar(timeLimit.isSelected());
         setOccultCharVar(occultChar.getValue().toString().charAt(0));
