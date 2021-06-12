@@ -23,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import reconstitution.MainStudent;
 import reconstitution.MainTeacher;
 import reconstitution.models.Entrainement;
 import reconstitution.models.Evaluation;
@@ -105,25 +106,23 @@ public class TeacherCreateController implements Initializable {
     }
 
     @FXML
-    public void saveExercise(){
+    public void saveExercise() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Sauvegarder votre exercice");
         //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
         File file = fileChooser.showSaveDialog(MainTeacher.getStage());
-        if(file!=null) {
+        if (file != null) {
             Texte texte = new Texte(occultCharVar, false);
             texte.setMode(lettersMotVar);
             texte.setOccultChar(occultCharVar);
             texte.setSensiCasse(caseSensitivVar);
-            texte.setTexteClair(textClair.getText());
+            texte.entrerTexteProf(textClair.getText());
             exo.setTexte(texte);
             exo.setConsigne(consigne.getText());
-            if(timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
+            if (timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
             //TODO: realTime
             //TODO: showSolution
             Exercice.sauvegarder(exo, file.getAbsolutePath());
-
-
 
 
             Stage saveSuccess = new Stage();
@@ -131,7 +130,9 @@ public class TeacherCreateController implements Initializable {
             Label label = new Label("Le sauvegarde a été réalisé avec succès.");
             Button openFolder = new Button("Ouvrir le dossier");
             Button ok = new Button("OK");
-            ok.setOnAction(e -> {saveSuccess.close();});
+            ok.setOnAction(e -> {
+                saveSuccess.close();
+            });
             openFolder.setOnAction(e -> {
                 try {
                     Desktop.getDesktop().open(file.getParentFile());
@@ -144,6 +145,22 @@ public class TeacherCreateController implements Initializable {
             saveSuccess.setScene(new Scene(ap, 400, 100));
             saveSuccess.setResizable(false);
             saveSuccess.show();
+        }
+    }
+
+    @FXML
+    public void openExo(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Importer un exercice");
+        File file = fileChooser.showOpenDialog(MainTeacher.getStage());
+        if(file!=null) {
+            try {
+                exo = (Exercice) Exercice.ouvrir(file.getAbsolutePath());
+            } catch (Exception e){
+                e.printStackTrace();
+                return;
+            }
+            //TODO: Faire tout les setters sur les options et les champs de la vue
         }
     }
 

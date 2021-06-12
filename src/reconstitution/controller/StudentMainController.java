@@ -71,6 +71,7 @@ public class StudentMainController implements Initializable {
             // Initialisation du timer
             initTimeLeft();
             // Mise a jour du timer
+            timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
@@ -170,9 +171,13 @@ public class StudentMainController implements Initializable {
         dateDebutFin = c.getTime();
     }
 
-    public void updateTimeRemain(){
-        compteur = dateDebutFin.getTime()-new Date().getTime();
-        time.setText("Temps restant : "+new SimpleDateFormat("mm:ss").format(compteur));
+    public void updateTimeRemain() {
+        compteur = dateDebutFin.getTime() - new Date().getTime();
+        if(compteur<6000) {
+            time.setText("Temps restant : " + new SimpleDateFormat("mm:ss").format(compteur));
+        } else {
+            time.setText("Temps restant : " + new SimpleDateFormat("HH:mm:ss").format(compteur));
+        }
     }
 
     public void initTimeLeft(){
@@ -181,7 +186,11 @@ public class StudentMainController implements Initializable {
 
     public void updateTimeLeft(){
         compteur = new Date().getTime()-dateDebutFin.getTime();
-        time.setText("Temps écoulé : "+new SimpleDateFormat("mm:ss").format(compteur));
+        if(compteur<3660000) {
+            time.setText("Temps écoulé : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
+        } else {
+            time.setText("Temps écoulé : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
+        }
     }
 
 }
