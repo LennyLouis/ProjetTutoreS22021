@@ -16,9 +16,6 @@ public class Texte implements Serializable {
 	public Texte(char occultChar, boolean sensiCasse) {
 		super();
 		this.occultChar = occultChar;
-		this.nbMaxMots = nbMaxMots;
-		this.nbMotsDecouv = nbMotsDecouv;
-		this.nbMotsTotal = nbMotsTotal;
 		this.sensiCasse = sensiCasse;
 		this.texteOccult = new String[nbMaxMots];
 		this.texteClair = new String[nbMaxMots];
@@ -70,11 +67,12 @@ public class Texte implements Serializable {
 					for(int i = 0; i < nbMotsTotal; i++) {
 						if(texteClair[i] == mot) {
 							texteOccult[i] = texteClair[i];
+							nbMotsDecouv++;
 						}
 					}
 				}
 				else {
-					for(int i = 0; i < nbMaxMots; i++) {
+					for(int i = 0; i < nbMotsTotal; i++) {
 						boolean identique = true;
 						for(int a = 0; a < mot.length(); a++) {
 							if(mot.toLowerCase() != texteClair[i].toLowerCase()) {
@@ -83,6 +81,7 @@ public class Texte implements Serializable {
 						}
 						if(identique) {
 							texteOccult[i] = texteClair[i];
+							nbMotsDecouv++;
 						}
 					}
 				}
@@ -91,24 +90,26 @@ public class Texte implements Serializable {
 
 			case 2:								//Mot incomplet 2 lettres
 				if(isSensiCasse()) {
-					for(int i = 0; i < nbMaxMots; i++) {
+					for(int i = 0; i < nbMotsTotal; i++) {
 						if(texteClair[i].length() >= mot.length()) {
 							if(texteClair[i].length() >= 2 && mot.length() >= 2) {
 								for(int a = 0; a < mot.length(); a++) {
 									if(texteClair[i].charAt(a) == mot.charAt(a)) {
 										texteOccult[i] = texteClair[i];
+										nbMotsDecouv++;
 									}
 								}
 							}else {
 								if(texteClair[i] == mot) {
 									texteOccult[i] = texteClair[i];
+									nbMotsDecouv++;
 								}
 							}
 						}
 					}
 				}
 				else {
-					for(int i = 0; i < nbMaxMots; i++) {
+					for(int i = 0; i < nbMotsTotal; i++) {
 						boolean identique = true;
 						if(mot.length() >= 2 && texteClair[i].length() >= 2) {
 							for(int a = 0; a < mot.length(); a++) {
@@ -118,10 +119,12 @@ public class Texte implements Serializable {
 							}
 							if(identique) {
 								texteOccult[i] = texteClair[i];
+								nbMotsDecouv++;
 							}
 						}else {
 							if(texteClair[i].toLowerCase() == mot.toLowerCase()) {
 								texteOccult[i] = texteClair[i];
+								nbMotsDecouv++;
 							}
 						}
 					}
@@ -131,24 +134,26 @@ public class Texte implements Serializable {
 
 			case 3:								//Mot incomplet 2 lettres
 				if(isSensiCasse()) {
-					for(int i = 0; i < nbMaxMots; i++) {
+					for(int i = 0; i < nbMotsTotal; i++) {
 						if(texteClair[i].length() >= mot.length()) {
 							if(texteClair[i].length() >= 3 && mot.length() >= 3) {
 								for(int a = 0; a < mot.length(); a++) {
 									if(texteClair[i].charAt(a) == mot.charAt(a)) {
 										texteOccult[i] = texteClair[i];
+										nbMotsDecouv++;
 									}
 								}
 							}else {
 								if(texteClair[i] == mot) {
 									texteOccult[i] = texteClair[i];
+									nbMotsDecouv++;
 								}
 							}
 						}
 					}
 				}
 				else {
-					for(int i = 0; i < nbMaxMots; i++) {
+					for(int i = 0; i < nbMotsTotal; i++) {
 						boolean identique = true;
 						if(mot.length() >= 3 && texteClair[i].length() >= 3) {
 							for(int a = 0; a < mot.length(); a++) {
@@ -158,10 +163,12 @@ public class Texte implements Serializable {
 							}
 							if(identique) {
 								texteOccult[i] = texteClair[i];
+								nbMotsDecouv++;
 							}
 						}else {
 							if(texteClair[i].toLowerCase() == mot.toLowerCase()) {
 								texteOccult[i] = texteClair[i];
+								nbMotsDecouv++;
 							}
 						}
 					}

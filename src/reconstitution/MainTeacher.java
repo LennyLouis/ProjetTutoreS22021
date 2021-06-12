@@ -26,7 +26,6 @@ public class MainTeacher extends Application {
         setView("/view/teacherHomeView.fxml");
     }
 
-
     public static void main(String[] args) {
         launch(args);
     }

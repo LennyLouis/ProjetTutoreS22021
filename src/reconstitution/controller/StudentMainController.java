@@ -7,6 +7,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
+import reconstitution.models.Evaluation;
 import reconstitution.models.Exercice;
 
 import java.io.File;
@@ -22,9 +23,12 @@ public class StudentMainController implements Initializable {
 
     private static boolean playPauseSwitch = false;
     private static boolean muteSwitch = false;
+    private static boolean evaluation;
 
     private MediaPlayer mediaPlayer;
     private Exercice exo;
+
+    private int compteur;
 
     @FXML
     ProgressBar mediaProgressBar;
@@ -47,6 +51,9 @@ public class StudentMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         exo = StudentHomeController.exo;
+        if(!(exo instanceof Evaluation)){
+            evaluation = true;
+        }
         File tempFile = null;
         try {
 
