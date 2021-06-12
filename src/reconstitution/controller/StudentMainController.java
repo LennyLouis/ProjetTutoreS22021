@@ -68,7 +68,15 @@ public class StudentMainController implements Initializable {
                 }
             }, 0, 1000);
         } else {
-
+            // Initialisation du timer
+            initTimeLeft();
+            // Mise a jour du timer
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    javafx.application.Platform.runLater(() -> updateTimeLeft());
+                }
+            }, 0, 1000);
         }
         // Consigne
         consigne.setText("Consigne : "+exo.getConsigne());
@@ -165,6 +173,15 @@ public class StudentMainController implements Initializable {
     public void updateTimeRemain(){
         compteur = dateDebutFin.getTime()-new Date().getTime();
         time.setText("Temps restant : "+new SimpleDateFormat("mm:ss").format(compteur));
+    }
+
+    public void initTimeLeft(){
+        dateDebutFin = new Date();
+    }
+
+    public void updateTimeLeft(){
+        compteur = new Date().getTime()-dateDebutFin.getTime();
+        time.setText("Temps écoulé : "+new SimpleDateFormat("mm:ss").format(compteur));
     }
 
 }
