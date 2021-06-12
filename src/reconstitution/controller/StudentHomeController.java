@@ -1,13 +1,15 @@
 package reconstitution.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import reconstitution.MainStudent;
 import reconstitution.MainTeacher;
 import reconstitution.models.Exercice;
@@ -21,10 +23,17 @@ public class StudentHomeController implements Initializable {
 
     private static Scene scene;
     public static Exercice exo;
+    private static Stage param;
+
     @FXML
     Rectangle blackPane;
     @FXML
     ImageView img;
+
+    @FXML
+    public void openParam() throws IOException {
+        param.show();
+    }
 
     @FXML
     public void launchApp() throws IOException {
@@ -62,8 +71,21 @@ public class StudentHomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        createParamStage();
     }
+    public void createParamStage(){
+        param = new Stage();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/view/globalParamView.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        param.setTitle("Paramètres");
+        param.setScene(new Scene(root));
+        param.setResizable(false);
+    }
+
 
     public double percent(double per, double total){
         return total*(per/100);
