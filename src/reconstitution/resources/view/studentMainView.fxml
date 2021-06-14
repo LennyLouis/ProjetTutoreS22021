@@ -29,14 +29,14 @@
             <Image url="@../images/avatar_etudiant.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="mediaTextArea" layoutX="375.0" layoutY="20.0" prefHeight="300.0" prefWidth="320.0" />
-      <HBox layoutX="255.0" layoutY="365.0" prefHeight="25.0" prefWidth="240.0">
+      <TextArea fx:id="mediaTextArea" editable="false" layoutX="375.0" layoutY="20.0" prefHeight="300.0" prefWidth="320.0" />
+      <HBox layoutX="250.0" layoutY="378.0" prefHeight="25.0" prefWidth="240.0">
          <children>
-            <TextField fx:id="reponseTextField" prefHeight="25.0" prefWidth="203.0" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="reponseTextField" prefHeight="25.0" prefWidth="203.0" promptText="Entrez un mot..." HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#reponse" text="OK" />
          </children>
       </HBox>
-      <Label fx:id="consigne" alignment="TOP_LEFT" layoutX="25.0" layoutY="330.0" prefHeight="47.0" prefWidth="320.0" text="Consigne : " />
+      <Label fx:id="consigne" alignment="TOP_LEFT" layoutX="25.0" layoutY="330.0" prefHeight="47.0" prefWidth="320.0" text="Consigne : " wrapText="true" />
       <Label fx:id="time" layoutX="582.0" layoutY="330.0" text="Temps restant : 00:00" />
       <VBox layoutX="25.0" layoutY="21.0" prefHeight="300.0" prefWidth="320.0">
          <children>

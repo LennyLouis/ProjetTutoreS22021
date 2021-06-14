@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import reconstitution.MainTeacher;
 
@@ -24,7 +23,7 @@ public class TeacherHomeController implements Initializable {
 
     @FXML
     public void launchApp() throws IOException {
-        MainTeacher.setView("/view/teacherMenuView.fxml");
+        MainTeacher.setView("/view/teacherHomeMenuView.fxml");
     }
 
     @FXML

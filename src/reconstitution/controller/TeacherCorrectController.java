@@ -13,7 +13,7 @@ public class TeacherCorrectController implements Initializable {
 
     @FXML
     public void homeButton() throws IOException {
-        MainTeacher.setView("/view/teacherMenuView.fxml");
+        MainTeacher.setView("/view/teacherHomeMenuView.fxml");
     }
 
     @Override

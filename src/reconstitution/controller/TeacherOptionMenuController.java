@@ -30,6 +30,7 @@ public class TeacherOptionMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         occultChar.getItems().addAll("#","-","_","~");
+        occultChar.getSelectionModel().selectFirst();
 
     }
 

@@ -1,16 +1,15 @@
 package reconstitution.controller;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -23,14 +22,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import reconstitution.MainStudent;
 import reconstitution.MainTeacher;
 import reconstitution.models.Entrainement;
 import reconstitution.models.Evaluation;
 import reconstitution.models.Exercice;
 import reconstitution.models.Texte;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -76,6 +73,9 @@ public class TeacherCreateController implements Initializable {
     @FXML
     TextArea consigne, aide, textClair;
 
+    @FXML
+    TextField title;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createOptionStage();
@@ -93,7 +93,7 @@ public class TeacherCreateController implements Initializable {
 
     @FXML
     public void homeButton() throws IOException {
-        MainTeacher.setView("/view/teacherMenuView.fxml");
+        MainTeacher.setView("/view/teacherHomeMenuView.fxml");
     }
 
     @FXML
@@ -119,9 +119,11 @@ public class TeacherCreateController implements Initializable {
             texte.entrerTexteProf(textClair.getText());
             exo.setTexte(texte);
             exo.setConsigne(consigne.getText());
+            exo.setTitre(title.getText());
             if (timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
             //TODO: realTime
             //TODO: showSolution
+            //TODO: Aide
             Exercice.sauvegarder(exo, file.getAbsolutePath());
 
 

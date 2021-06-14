@@ -187,7 +187,7 @@ public class StudentMainController implements Initializable {
     public void updateTimeLeft(){
         compteur = new Date().getTime()-dateDebutFin.getTime();
         if(compteur<3660000) {
-            time.setText("Temps écoulé : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
+            time.setText("Temps écoulé : " + new SimpleDateFormat("mm:ss").format(compteur-3600000));
         } else {
             time.setText("Temps écoulé : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
         }

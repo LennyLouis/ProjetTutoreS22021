@@ -43,7 +43,7 @@ public class Exercice implements Serializable {
 		this.media = media;
 	}
 	
-	public void setTitre() {
+	public void setTitre(String titre) {
 		this.titre = titre;
 	}
 
