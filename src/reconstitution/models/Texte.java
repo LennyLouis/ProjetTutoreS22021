@@ -70,32 +70,6 @@ public class Texte implements Serializable {
 
 	void entrerMotEtu(String mot) {
 		switch(mode) {
-			case 1: 							//Mot incomplet désactivé
-				if(isSensiCasse()) {
-					for(int i = 0; i < tailleTableau; i++) {
-						if(texteClair[i].equals(mot)) {
-							texteOccult[i] = texteClair[i];
-							nbMotsDecouv++;
-						}
-					}
-				}
-				else {
-					for(int i = 0; i < tailleTableau; i++) {
-						boolean identique = true;
-						for(int a = 0; a < mot.length(); a++) {
-							if(mot.toLowerCase() != texteClair[i].toLowerCase()) {
-								identique = false;
-							}
-						}
-						if(identique) {
-							texteOccult[i] = texteClair[i];
-							nbMotsDecouv++;
-						}
-					}
-				}
-
-				break;
-
 			case 2:								//Mot incomplet 2 lettres
 				if(isSensiCasse()) {
 					for(int i = 0; i < tailleTableau; i++) {
@@ -183,6 +157,32 @@ public class Texte implements Serializable {
 				}
 
 				break;
+			default: 							//Mot incomplet désactivé
+				if(isSensiCasse()) {
+					for(int i = 0; i < tailleTableau; i++) {
+						if(texteClair[i].equals(mot)) {
+							texteOccult[i] = texteClair[i];
+							nbMotsDecouv++;
+						}
+					}
+				}
+				else {
+					for(int i = 0; i < tailleTableau; i++) {
+						boolean identique = true;
+						for(int a = 0; a < mot.length(); a++) {
+							if(mot.toLowerCase() != texteClair[i].toLowerCase()) {
+								identique = false;
+							}
+						}
+						if(identique) {
+							texteOccult[i] = texteClair[i];
+							nbMotsDecouv++;
+						}
+					}
+				}
+
+				break;
+
 		}
 
 	}
