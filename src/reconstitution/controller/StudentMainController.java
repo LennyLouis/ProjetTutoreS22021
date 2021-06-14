@@ -7,6 +7,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
+import reconstitution.MainStudent;
 import reconstitution.models.Evaluation;
 import reconstitution.models.Exercice;
 
@@ -42,7 +43,7 @@ public class StudentMainController implements Initializable {
     TextArea mediaTextArea;
 
     @FXML
-    Label time, consigne, mediaTime;
+    Label time, consigne, mediaTime, typeExercice;
 
     @FXML
     MediaView mediaView;
@@ -129,6 +130,20 @@ public class StudentMainController implements Initializable {
     }
 
     @FXML
+    public void save(){
+
+    }
+
+    @FXML
+    public void help(){
+
+    }
+
+    @FXML
+    public void apropos(){
+
+    }
+
     public void initMediaPlayer(){
         // Loading byte[] media into a temporary file
         File tempFile = null;

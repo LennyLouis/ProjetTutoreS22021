@@ -3,7 +3,7 @@ package reconstitution.models;
 import java.io.Serializable;
 
 public class Entrainement extends Exercice implements Serializable {
-	private Aide aide;
+	private String aide;
 
 	//Constructeurs
 	public Entrainement() {
@@ -12,11 +12,11 @@ public class Entrainement extends Exercice implements Serializable {
 	}
 
 	//Setters & Getters
-	public Aide getAide() {
+	public String getAide() {
 		return aide;
 	}
 
-	public void setAide(Aide aide) {
+	public void setAide(String aide) {
 		this.aide = aide;
 	}
 	

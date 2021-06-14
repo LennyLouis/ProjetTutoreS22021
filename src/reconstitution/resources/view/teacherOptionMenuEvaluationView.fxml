@@ -53,7 +53,7 @@
             </HBox>
             <HBox prefHeight="0.0" prefWidth="441.0">
                <children>
-                  <CheckBox fx:id="timeLimit" mnemonicParsing="false">
+                  <CheckBox fx:id="timeLimit" mnemonicParsing="false" onAction="#editable">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -63,7 +63,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="timeLimitValue" prefHeight="25.0" prefWidth="30.0">
+                  <TextField fx:id="timeLimitValue" editable="false" prefHeight="25.0" prefWidth="30.0" text="0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

@@ -14,6 +14,8 @@ import static reconstitution.controller.TeacherCreateController.*;
 
 public class TeacherOptionMenuController implements Initializable {
 
+    private boolean editable;
+
     @FXML
     CheckBox caseSensitiv, timeLimit, showSolution, realTime;
 
@@ -31,6 +33,7 @@ public class TeacherOptionMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         occultChar.getItems().addAll("#","-","_","~");
         occultChar.getSelectionModel().selectFirst();
+        editable = true;
 
     }
 
@@ -52,11 +55,18 @@ public class TeacherOptionMenuController implements Initializable {
         setTimeLimitVar(timeLimit.isSelected());
         setOccultCharVar(occultChar.getValue().toString().charAt(0));
         setTimeLimitValueVar(Integer.parseInt(timeLimitValue.getText()));
+        System.out.println("débug: " + Integer.parseInt(timeLimitValue.getText()));
         getMenuOption().close();
     }
 
     @FXML
     public void cancel(){
         getMenuOption().close();
+    }
+
+    @FXML
+    public void editable(){
+        timeLimitValue.setEditable(editable);
+        editable = !editable;
     }
 }

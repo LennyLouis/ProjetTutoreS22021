@@ -39,8 +39,12 @@ public class MainStudent extends Application {
     }
 
     public static void setView(String path) throws IOException {
+        setView(path, "Reconstitution (étudiant)");
+    }
+
+    public static void setView(String path, String title) throws IOException {
         Parent parent = FXMLLoader.load(MainStudent.class.getResource(path));
-        stage.setTitle("Reconstitution (étudiant)");
+        stage.setTitle(title);
         stage.getIcons().add(new Image(MainStudent.class.getResourceAsStream("/images/icon_reconstitution.png")));
         Scene scene = new Scene(parent, 720, 480);
         scene.getStylesheets().add(String.valueOf(MainStudent.class.getResource("/style.css")));
