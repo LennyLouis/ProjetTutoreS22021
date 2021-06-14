@@ -47,6 +47,7 @@ public class StudentMainController implements Initializable {
     public static Timer timer;
 
     private boolean isItGood;
+    private boolean solutionAffichee = false;
 
     @FXML
     ProgressBar mediaProgressBar;
@@ -147,8 +148,15 @@ public class StudentMainController implements Initializable {
 
     @FXML
     public void afficherLaSolution(){
-        mediaTextArea.setText(exo.getTexte().getVisibleTextClair());
-        solutionButton.setText("Masquer la Solution");
+        if(!solutionAffichee) {
+            mediaTextArea.setText(exo.getTexte().getVisibleTextClair());
+            solutionButton.setText("Masquer la solution");
+            solutionAffichee = true;
+        }else{
+            mediaTextArea.setText(exo.getTexte().getVisibleTextOccult());
+            solutionButton.setText("Afficher la solution");
+            solutionAffichee = false;
+        }
     }
 
     @FXML
