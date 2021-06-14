@@ -6,7 +6,7 @@ public class Texte implements Serializable {
 	private String texteOccult[];
 	private String texteClair[];
 	private char occultChar;
-	private int nbMaxMots;
+	private int tailleTableau;
 	private int nbMotsDecouv;
 	private int nbMotsTotal;
 	private int mode;
@@ -15,11 +15,11 @@ public class Texte implements Serializable {
 	//Constructeur
 	public Texte(char occultChar, boolean sensiCasse) {
 		super();
-		this.nbMaxMots = 10000;
+		this.tailleTableau = 0;
 		this.occultChar = occultChar;
 		this.sensiCasse = sensiCasse;
-		this.texteOccult = new String[nbMaxMots];
-		this.texteClair = new String[nbMaxMots];
+		this.texteOccult = new String[3000];
+		this.texteClair = new String[3000];
 	}
 
 	//Methodes
@@ -33,22 +33,27 @@ public class Texte implements Serializable {
 			//remplissage du texte en clair
 			else {
 				texteClair[c] = mot;
-				c++;
+				tailleTableau++;
 				nbMotsTotal++;
-				mot = "";
 
 				//remplissage du texte masqué avec le caratère occultant
 				for(int a = 0; a < mot.length(); a++) {
-					texteOccult[c] = texteOccult[c] + occultChar;
+					if(texteOccult[c] == null){
+						texteOccult[c] = Character.toString(occultChar);
+					}else {
+						texteOccult[c] = texteOccult[c] + occultChar;
+					}
 				}
+				c++;
 				mot = "";
 			}
 			//gestion de la ponctuation
-			if(texte.charAt(i) == '.' || texte.charAt(i) == '!' || texte.charAt(i) =='?') {
+			if(texte.charAt(i) == '.' || texte.charAt(i) == '!' || texte.charAt(i) =='?' || texte.charAt(i) ==',') {
 				String ponctuation = "";
 				ponctuation = ponctuation + texte.charAt(i);
 				texteClair[c] = ponctuation;
 				texteOccult[c] = ponctuation;
+				tailleTableau++;
 			}
 		}
 	}
@@ -56,14 +61,8 @@ public class Texte implements Serializable {
 	public String getVisibleTextOccult() {
 		String visibleTexteOccult = "";
 		String[] tableauTexteOccult = getTextOccult();
-		for(int i = 0; i < nbMotsTotal; i++) {
-			if(tableauTexteOccult[i++] != "." || tableauTexteOccult[i] != "," || tableauTexteOccult[i] != "!" || tableauTexteOccult[i] != "?" && tableauTexteOccult != null){
-				visibleTexteOccult = visibleTexteOccult + " ";
-				visibleTexteOccult = visibleTexteOccult + tableauTexteOccult[i];
-			}
-			else {
-				visibleTexteOccult = visibleTexteOccult + tableauTexteOccult[i] + " ";
-			}
+		for(int i = 0; i < tailleTableau - 1; i++) {
+			visibleTexteOccult = visibleTexteOccult + texteOccult[i] + " ";
 		}
 		return visibleTexteOccult;
 	}
@@ -72,7 +71,7 @@ public class Texte implements Serializable {
 		switch(mode) {
 			case 1: 							//Mot incomplet désactivé
 				if(isSensiCasse()) {
-					for(int i = 0; i < nbMotsTotal; i++) {
+					for(int i = 0; i < tailleTableau; i++) {
 						if(texteClair[i] == mot) {
 							texteOccult[i] = texteClair[i];
 							nbMotsDecouv++;
@@ -80,7 +79,7 @@ public class Texte implements Serializable {
 					}
 				}
 				else {
-					for(int i = 0; i < nbMotsTotal; i++) {
+					for(int i = 0; i < tailleTableau; i++) {
 						boolean identique = true;
 						for(int a = 0; a < mot.length(); a++) {
 							if(mot.toLowerCase() != texteClair[i].toLowerCase()) {
@@ -98,7 +97,7 @@ public class Texte implements Serializable {
 
 			case 2:								//Mot incomplet 2 lettres
 				if(isSensiCasse()) {
-					for(int i = 0; i < nbMotsTotal; i++) {
+					for(int i = 0; i < tailleTableau; i++) {
 						if(texteClair[i].length() >= mot.length()) {
 							if(texteClair[i].length() >= 2 && mot.length() >= 2) {
 								for(int a = 0; a < mot.length(); a++) {
@@ -117,7 +116,7 @@ public class Texte implements Serializable {
 					}
 				}
 				else {
-					for(int i = 0; i < nbMotsTotal; i++) {
+					for(int i = 0; i < tailleTableau; i++) {
 						boolean identique = true;
 						if(mot.length() >= 2 && texteClair[i].length() >= 2) {
 							for(int a = 0; a < mot.length(); a++) {
@@ -142,7 +141,7 @@ public class Texte implements Serializable {
 
 			case 3:								//Mot incomplet 2 lettres
 				if(isSensiCasse()) {
-					for(int i = 0; i < nbMotsTotal; i++) {
+					for(int i = 0; i < tailleTableau; i++) {
 						if(texteClair[i].length() >= mot.length()) {
 							if(texteClair[i].length() >= 3 && mot.length() >= 3) {
 								for(int a = 0; a < mot.length(); a++) {
@@ -161,7 +160,7 @@ public class Texte implements Serializable {
 					}
 				}
 				else {
-					for(int i = 0; i < nbMotsTotal; i++) {
+					for(int i = 0; i < tailleTableau; i++) {
 						boolean identique = true;
 						if(mot.length() >= 3 && texteClair[i].length() >= 3) {
 							for(int a = 0; a < mot.length(); a++) {
@@ -192,10 +191,6 @@ public class Texte implements Serializable {
 		return texteOccult;
 	}
 
-	public int getNbMaxMots() {
-		return nbMaxMots;
-	}
-
 	public char getOccultChar() {
 		return occultChar;
 	}
@@ -214,10 +209,6 @@ public class Texte implements Serializable {
 
 	public boolean isSensiCasse() {
 		return sensiCasse;
-	}
-
-	public void setNbMaxMots(int nbMaxMots) {
-		this.nbMaxMots = nbMaxMots;
 	}
 
 	public void setOccultChar(char occulChar) {
