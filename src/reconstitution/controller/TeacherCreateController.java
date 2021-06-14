@@ -26,10 +26,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import reconstitution.MainTeacher;
-import reconstitution.models.Entrainement;
-import reconstitution.models.Evaluation;
-import reconstitution.models.Exercice;
-import reconstitution.models.Texte;
+import reconstitution.models.*;
 
 import java.awt.*;
 import java.io.File;
@@ -307,6 +304,20 @@ public class TeacherCreateController implements Initializable {
         occultCharVar = '#';
         timeLimitValueVar = 0;
         lettersMotVar = 0;
+    }
+
+    public void immport() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Importer un exercice");
+        File file = fileChooser.showOpenDialog(MainTeacher.getStage());
+        if(file!=null) {
+            try {
+                exo = (Exercice) Exercice.ouvrir(file.getAbsolutePath());
+            } catch (Exception e){
+                e.printStackTrace();
+                return;
+            }
+        }
     }
 
     public void createOptionStage(){
