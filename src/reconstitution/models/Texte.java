@@ -15,6 +15,7 @@ public class Texte implements Serializable {
 	//Constructeur
 	public Texte(char occultChar, boolean sensiCasse) {
 		super();
+		this.nbMaxMots = 10000;
 		this.occultChar = occultChar;
 		this.sensiCasse = sensiCasse;
 		this.texteOccult = new String[nbMaxMots];
@@ -23,9 +24,9 @@ public class Texte implements Serializable {
 
 	//Methodes
 	public void entrerTexteProf(String texte) {
-		int c = 0;									//compteur de "case" utilisées du tableau
+		int c = 0;				//compteur de "case" utilisées du tableau
+		String mot = "";
 		for(int i = 0; i < texte.length(); i++) {
-			String mot = "";
 			if(texte.charAt(i) != ' ' && texte.charAt(i) != '.' && texte.charAt(i) != '!' && texte.charAt(i) != '?') {
 				mot = mot + texte.charAt(i);
 			}
