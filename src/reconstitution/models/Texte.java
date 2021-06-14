@@ -56,12 +56,13 @@ public class Texte implements Serializable {
 				tailleTableau++;
 			}
 		}
+		tailleTableau = tailleTableau - 1;
 	}
 
 	public String getVisibleTextOccult() {
 		String visibleTexteOccult = "";
 		String[] tableauTexteOccult = getTextOccult();
-		for(int i = 0; i < tailleTableau - 1; i++) {
+		for(int i = 0; i < tailleTableau; i++) {
 			visibleTexteOccult = visibleTexteOccult + texteOccult[i] + " ";
 		}
 		return visibleTexteOccult;
@@ -72,7 +73,7 @@ public class Texte implements Serializable {
 			case 1: 							//Mot incomplet désactivé
 				if(isSensiCasse()) {
 					for(int i = 0; i < tailleTableau; i++) {
-						if(texteClair[i] == mot) {
+						if(texteClair[i].equals(mot)) {
 							texteOccult[i] = texteClair[i];
 							nbMotsDecouv++;
 						}
@@ -107,7 +108,7 @@ public class Texte implements Serializable {
 									}
 								}
 							}else {
-								if(texteClair[i] == mot) {
+								if(texteClair[i].equals(mot)) {
 									texteOccult[i] = texteClair[i];
 									nbMotsDecouv++;
 								}
@@ -129,7 +130,7 @@ public class Texte implements Serializable {
 								nbMotsDecouv++;
 							}
 						}else {
-							if(texteClair[i].toLowerCase() == mot.toLowerCase()) {
+							if(texteClair[i].toLowerCase().equals(mot.toLowerCase())) {
 								texteOccult[i] = texteClair[i];
 								nbMotsDecouv++;
 							}
@@ -151,7 +152,7 @@ public class Texte implements Serializable {
 									}
 								}
 							}else {
-								if(texteClair[i] == mot) {
+								if(texteClair[i].equals(mot)) {
 									texteOccult[i] = texteClair[i];
 									nbMotsDecouv++;
 								}
@@ -173,7 +174,7 @@ public class Texte implements Serializable {
 								nbMotsDecouv++;
 							}
 						}else {
-							if(texteClair[i].toLowerCase() == mot.toLowerCase()) {
+							if(texteClair[i].toLowerCase().equals(mot.toLowerCase())) {
 								texteOccult[i] = texteClair[i];
 								nbMotsDecouv++;
 							}
