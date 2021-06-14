@@ -27,7 +27,7 @@ public class Texte implements Serializable {
 		int c = 0;				//compteur de "case" utilisées du tableau
 		String mot = "";
 		for(int i = 0; i < texte.length(); i++) {
-			if(texte.charAt(i) != ' ' && texte.charAt(i) != '.' && texte.charAt(i) != '!' && texte.charAt(i) != '?') {
+			if(texte.charAt(i) != ' ' && texte.charAt(i) != '.' && texte.charAt(i) != '!' && texte.charAt(i) != '?' && texte.charAt(i) != ',') {
 				mot = mot + texte.charAt(i);
 			}
 			//remplissage du texte en clair
@@ -53,11 +53,17 @@ public class Texte implements Serializable {
 		}
 	}
 
-	public String getVisibleTextClair() {
+	public String getVisibleTextOccult() {
 		String visibleTexteOccult = "";
 		String[] tableauTexteOccult = getTextOccult();
 		for(int i = 0; i < nbMotsTotal; i++) {
-			visibleTexteOccult = visibleTexteOccult + tableauTexteOccult[i];
+			if(tableauTexteOccult[i++] != "." || tableauTexteOccult[i] != "," || tableauTexteOccult[i] != "!" || tableauTexteOccult[i] != "?" && tableauTexteOccult != null){
+				visibleTexteOccult = visibleTexteOccult + " ";
+				visibleTexteOccult = visibleTexteOccult + tableauTexteOccult[i];
+			}
+			else {
+				visibleTexteOccult = visibleTexteOccult + tableauTexteOccult[i] + " ";
+			}
 		}
 		return visibleTexteOccult;
 	}
@@ -230,7 +236,4 @@ public class Texte implements Serializable {
 		this.mode = mode;
 	}
 
-	public void setTexteClair(String texteClair) {
-		this.texteClair = texteClair.split(" "); //TODO: Faire un regex qui sépare correctement les bon mots
-	}
 }
