@@ -20,6 +20,7 @@ public class test {
         System.out.println(text.getVisibleTextOccult());
         text.entrerMotEtu("tex");
         System.out.println(text.getVisibleTextOccult());
+        System.out.println(text.getVisibleTextClair());
 
 
     }

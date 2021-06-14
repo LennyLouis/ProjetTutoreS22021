@@ -61,6 +61,15 @@ public class Texte implements Serializable {
 		return visibleTexteOccult;
 	}
 
+	public String getVisibleTextClair() {
+		String visibleTexteClair = "";
+		String[] tableauTexteClair = getTextClair();
+		for(int i = 0; i < tailleTableau; i++) {
+			visibleTexteClair = visibleTexteClair + texteClair[i];
+		}
+		return visibleTexteClair;
+	}
+
 	public void entrerMotEtu(String mot) {
 		switch(mode) {
 			case 2:								//Mot incomplet 2 lettres
@@ -178,6 +187,10 @@ public class Texte implements Serializable {
 	//Setters & Getters
 	public String[] getTextOccult() {
 		return texteOccult;
+	}
+
+	public String[] getTextClair() {
+		return texteClair;
 	}
 
 	public char getOccultChar() {
