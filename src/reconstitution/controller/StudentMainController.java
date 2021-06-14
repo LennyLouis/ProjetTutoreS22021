@@ -64,7 +64,7 @@ public class StudentMainController implements Initializable {
     MediaView mediaView;
 
     @FXML
-    Button playButton, muteButton;
+    Button playButton, muteButton, solutionButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -143,6 +143,12 @@ public class StudentMainController implements Initializable {
         System.out.println(reponseTextField.getText());
         System.out.println(exo.getTexte().getVisibleTextOccult());
         mediaTextArea.setText(exo.getTexte().getVisibleTextOccult());
+    }
+
+    @FXML
+    public void afficherLaSolution(){
+        mediaTextArea.setText(exo.getTexte().getVisibleTextClair());
+        solutionButton.setText("Masquer la Solution");
     }
 
     @FXML

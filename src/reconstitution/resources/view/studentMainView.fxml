@@ -77,6 +77,7 @@
             <Button mnemonicParsing="false" onAction="#apropos" prefHeight="25.0" prefWidth="67.0" styleClass="menuBtn" text="A propos" />
          </children>
       </HBox>
+      <Button fx:id="solutionButton" layoutX="524.0" layoutY="378.0" mnemonicParsing="false" onAction="#afficherSolution" text="Afficher la solution" />
       <Label text="Label" />
       <Label fx:id="compteurMot" layoutX="375.0" layoutY="330.0" />
    </children>
