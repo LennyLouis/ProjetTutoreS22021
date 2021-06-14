@@ -110,14 +110,16 @@ public class TeacherCreateController implements Initializable {
 
     @FXML
     public void saveExercise() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Sauvegarder votre exercice");
-        //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
-        File file = fileChooser.showSaveDialog(MainTeacher.getStage());
-        if (file != null && checkFields()) {
-            constructExercice();
-            Exercice.sauvegarder(exo, file.getAbsolutePath());
-            showDialog(file);
+        if(checkFields()){
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Sauvegarder votre exercice");
+            //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
+            File file = fileChooser.showSaveDialog(MainTeacher.getStage());
+            if (file != null) {
+                constructExercice();
+                Exercice.sauvegarder(exo, file.getAbsolutePath());
+                showDialog(file);
+            }
         }
     }
 

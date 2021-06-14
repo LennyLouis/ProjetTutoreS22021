@@ -123,7 +123,9 @@ public class StudentMainController implements Initializable {
 
     @FXML
     public void entrerTexte(){
-        exo.getTexte().entrerTexteProf(reponseTextField.getText());
+        exo.getTexte().entrerMotEtu(reponseTextField.getText());
+        System.out.println(reponseTextField.getText());
+        System.out.println(exo.getTexte().getVisibleTextOccult());
         mediaTextArea.setText(exo.getTexte().getVisibleTextOccult());
     }
 
@@ -166,11 +168,11 @@ public class StudentMainController implements Initializable {
             mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
         });
         mediaProgressBar.setOnMouseClicked(mouseEvent -> {
-            setMediaCursor(mouseEvent.getX()/mediaProgressBar.getWidth());
+            if(mediaPlayer.getCurrentTime().toMillis()>8.0) setMediaCursor(mouseEvent.getX()/mediaProgressBar.getWidth());
         });
         mediaTime.setOnMouseClicked(mouseEvent -> {
             double padding = (mediaProgressBar.getWidth()-mediaTime.getWidth())/2;
-            setMediaCursor((mouseEvent.getX()+padding)/mediaProgressBar.getWidth());
+            if(mediaPlayer.getCurrentTime().toMillis()>8.0) setMediaCursor((mouseEvent.getX()+padding)/mediaProgressBar.getWidth());
         });
     }
 
