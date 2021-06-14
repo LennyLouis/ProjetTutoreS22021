@@ -8,8 +8,8 @@ public class test {
         //exo.setConsigne("consigne");
         //exo.setMedia(null);
         Texte text = new Texte('/', false);
-        text.setMode(1);
-        text.entrerTexteProf("Je suis le texte. je pue je pète je prend mon cul pour une trompette!");
+        text.setMode(3);
+        text.entrerTexteProf("Je suis le texte. je pue je pète je prend mon cul pour une trompette! J'aime la vile du caca.");
         //exo.setTexte(text);
         System.out.println(text.getVisibleTextOccult());
         text.entrerMotEtu("suis");
