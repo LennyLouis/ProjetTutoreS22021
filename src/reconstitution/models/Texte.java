@@ -1,6 +1,7 @@
 package reconstitution.models;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 public class Texte implements Serializable {
 	private String texteOccult[];
@@ -169,10 +170,8 @@ public class Texte implements Serializable {
 				else {
 					for(int i = 0; i < tailleTableau; i++) {
 						boolean identique = true;
-						for(int a = 0; a < mot.length(); a++) {
-							if(mot.toLowerCase() != texteClair[i].toLowerCase()) {
-								identique = false;
-							}
+						if(mot.toLowerCase() != texteClair[i].toLowerCase()) {
+							identique = false;
 						}
 						if(identique) {
 							texteOccult[i] = texteClair[i];
