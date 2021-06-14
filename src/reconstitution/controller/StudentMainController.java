@@ -82,11 +82,7 @@ public class StudentMainController implements Initializable {
         // Consigne
         consigne.setText("Consigne : "+exo.getConsigne());
         // Script du média
-        StringBuffer stringBuffer = new StringBuffer();
-        for(int i = 0; i < exo.getTexte().getTexteClair().length; i++) {
-            stringBuffer.append(exo.getTexte().getTexteClair()[i]);
-        }
-        mediaTextArea.setText(stringBuffer.toString());
+        mediaTextArea.setText(exo.getTexte().getVisibleTextOccult());
     }
 
     public void setMediaCursor(Double time){
@@ -127,8 +123,9 @@ public class StudentMainController implements Initializable {
     }
 
     @FXML
-    public void reponse(){
-
+    public void entrerTexte(){
+        exo.getTexte().entrerTexteProf(reponseTextField.getText());
+        mediaTextArea.setText(exo.getTexte().getVisibleTextOccult());
     }
 
     @FXML

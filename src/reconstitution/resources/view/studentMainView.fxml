@@ -33,7 +33,7 @@
       <HBox layoutX="250.0" layoutY="378.0" prefHeight="25.0" prefWidth="240.0">
          <children>
             <TextField fx:id="reponseTextField" prefHeight="25.0" prefWidth="203.0" promptText="Entrez un mot..." HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#reponse" text="OK" />
+            <Button mnemonicParsing="false" onAction="#entrerTexte" text="OK" />
          </children>
       </HBox>
       <Label fx:id="consigne" alignment="TOP_LEFT" layoutX="25.0" layoutY="330.0" prefHeight="47.0" prefWidth="320.0" text="Consigne : " wrapText="true" />
