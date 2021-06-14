@@ -62,6 +62,10 @@ public class Exercice implements Serializable {
 		this.aide = aide;
 	}
 
+	public String getAide(){
+		return aide;
+	}
+
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}

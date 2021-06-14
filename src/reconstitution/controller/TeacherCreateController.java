@@ -129,7 +129,16 @@ public class TeacherCreateController implements Initializable {
                 e.printStackTrace();
                 return;
             }
-            //TODO: Faire tout les setters sur les options et les champs de la vue
+            if(exo instanceof  Evaluation){
+                consigne.setText(exo.getConsigne());
+                textClair.setText(exo.getTexte().getVisibleTextClair());
+                title.setText(exo.getTitre());
+            }else{
+                consigne.setText(exo.getConsigne());
+                textClair.setText(exo.getTexte().getVisibleTextClair());
+                title.setText(exo.getTitre());
+                aide.setText(exo.getAide());
+            }
         }
     }
 
@@ -304,20 +313,6 @@ public class TeacherCreateController implements Initializable {
         occultCharVar = '#';
         timeLimitValueVar = 0;
         lettersMotVar = 0;
-    }
-
-    public void immport() throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Importer un exercice");
-        File file = fileChooser.showOpenDialog(MainTeacher.getStage());
-        if(file!=null) {
-            try {
-                exo = (Exercice) Exercice.ouvrir(file.getAbsolutePath());
-            } catch (Exception e){
-                e.printStackTrace();
-                return;
-            }
-        }
     }
 
     public void createOptionStage(){
