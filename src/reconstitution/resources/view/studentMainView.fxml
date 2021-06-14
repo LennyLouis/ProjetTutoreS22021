@@ -38,9 +38,9 @@
       </HBox>
       <Label fx:id="consigne" alignment="TOP_LEFT" layoutX="25.0" layoutY="330.0" prefHeight="47.0" prefWidth="320.0" text="Consigne : " wrapText="true" />
       <Label fx:id="time" layoutX="582.0" layoutY="330.0" text="Temps restant : 00:00" />
-      <VBox layoutX="25.0" layoutY="21.0" prefHeight="300.0" prefWidth="320.0">
+      <VBox layoutX="25.0" layoutY="44.0" prefHeight="268.0" prefWidth="320.0">
          <children>
-            <MediaView fx:id="mediaView" fitHeight="274.0" fitWidth="320.0">
+            <MediaView fx:id="mediaView" fitHeight="250.0" fitWidth="320.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -65,5 +65,14 @@
             </HBox>
          </children>
       </VBox>
+      <Button layoutX="535.0" layoutY="378.0" mnemonicParsing="false" text="Aide" />
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="320.0">
+         <children>
+            <Label fx:id="typeExercice" prefHeight="25.0" prefWidth="48.0" text="Exercice" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="73.0" text="Enregistrer" />
+            <Button mnemonicParsing="false" onAction="#help" prefHeight="25.0" prefWidth="45.0" text="Aide" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="A propos" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
