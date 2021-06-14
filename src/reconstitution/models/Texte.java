@@ -72,7 +72,7 @@ public class Texte implements Serializable {
 	public void entrerMotEtu(String mot) {
 		switch(mode) {
 			case 2:								//Mot incomplet 2 lettres
-				if(isSensiCasse()) {
+				if(!isSensiCasse()) {
 					for(int i = 0; i < tailleTableau; i++) {
 						if(texteClair[i].length() >= mot.length()) {
 							if(texteClair[i].length() >= 2 && mot.length() >= 2) {
@@ -93,12 +93,10 @@ public class Texte implements Serializable {
 				}
 				else {
 					for(int i = 0; i < tailleTableau; i++) {
-						boolean identique = true;
-						if(mot.length() >= 2 && texteClair[i].length() >= 2) {
-							for(int a = 0; a < mot.length(); a++) {
-								if(mot.toLowerCase().charAt(a) != texteClair[i].toLowerCase().charAt(a)) {
-									identique = false;
-								}
+						boolean identique = false;
+						if(mot.length() >= 2 && texteClair[i].length() >= 2 && mot.length() <= texteClair[i].length()) {
+							if(mot.toLowerCase(Locale.ROOT).equals(texteClair[i].toLowerCase(Locale.ROOT).substring(0, mot.length()))){
+								identique = true;
 							}
 							if(identique) {
 								texteOccult[i] = texteClair[i];
@@ -116,7 +114,7 @@ public class Texte implements Serializable {
 				break;
 
 			case 3:								//Mot incomplet 2 lettres
-				if(isSensiCasse()) {
+				if(!isSensiCasse()) {
 					for(int i = 0; i < tailleTableau; i++) {
 						if(texteClair[i].length() >= mot.length()) {
 							if(texteClair[i].length() >= 3 && mot.length() >= 3) {
@@ -137,13 +135,12 @@ public class Texte implements Serializable {
 				}
 				else {
 					for(int i = 0; i < tailleTableau; i++) {
-						boolean identique = true;
-						if(mot.length() >= 3 && texteClair[i].length() >= 3) {
-							for(int a = 0; a < mot.length(); a++) {
-								if(mot.toLowerCase().charAt(a) != texteClair[i].toLowerCase().charAt(a)) {
-									identique = false;
-								}
+						boolean identique = false;
+						if(mot.length() >= 3 && texteClair[i].length() >= 3 && mot.length() <= texteClair[i].length()) {
+							if(mot.toLowerCase(Locale.ROOT).equals(texteClair[i].toLowerCase(Locale.ROOT).substring(0, mot.length()))){
+								identique = true;
 							}
+
 							if(identique) {
 								texteOccult[i] = texteClair[i];
 								nbMotsDecouv++;
@@ -159,7 +156,7 @@ public class Texte implements Serializable {
 
 				break;
 			default: 							//Mot incomplet désactivé
-				if(isSensiCasse()) {
+				if(!isSensiCasse()) {
 					for(int i = 0; i < tailleTableau; i++) {
 						if(texteClair[i].equals(mot)) {
 							texteOccult[i] = texteClair[i];
@@ -169,9 +166,9 @@ public class Texte implements Serializable {
 				}
 				else {
 					for(int i = 0; i < tailleTableau; i++) {
-						boolean identique = true;
-						if(mot.toLowerCase() != texteClair[i].toLowerCase()) {
-							identique = false;
+						boolean identique = false;
+						if(mot.toLowerCase().equals(texteClair[i].toLowerCase())) {
+							identique = true;
 						}
 						if(identique) {
 							texteOccult[i] = texteClair[i];
