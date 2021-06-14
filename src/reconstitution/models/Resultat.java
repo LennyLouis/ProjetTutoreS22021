@@ -6,13 +6,15 @@ public class Resultat {
     private final String nom;
     private final String prenom;
     private final Texte texte;
+    private final int time;
 
-    public Resultat(int motsTrouve, int motsTotal, String nom, String prenom, Texte texte) {
+    public Resultat(int motsTrouve, int motsTotal, String nom, String prenom, Texte texte, int time) {
         this.motsTrouve = motsTrouve;
         this.motsTotal = motsTotal;
         this.nom = nom;
         this.prenom = prenom;
         this.texte = texte;
+        this.time = time;
     }
 
     public int getMotsTrouve() {
@@ -33,5 +35,9 @@ public class Resultat {
 
     public Texte getTexte() {
         return texte;
+    }
+
+    public int getTime(){
+        return time;
     }
 }

@@ -177,7 +177,7 @@ public class StudentMainController implements Initializable {
             System.out.println(isItGood);
             if(isItGood){
                 nameStage.close();
-                Resultat resultat = new Resultat(12, 24, nom.getText(), prenom.getText(), exo.getTexte());
+                Resultat resultat = new Resultat(12, 24, nom.getText(), prenom.getText(), exo.getTexte(), 3600000);
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Rendre votre exercice");
                 //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
