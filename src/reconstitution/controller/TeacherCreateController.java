@@ -176,9 +176,9 @@ public class TeacherCreateController implements Initializable {
         exo.setConsigne(consigne.getText());
         exo.setTitre(title.getText());
         if (timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
-        //TODO: realTime
-        //TODO: showSolution
-        //TODO: Aide
+        exo.setAide(aide.getText());
+        exo.setTempReel(realTimeVar);
+        exo.setShowSolution(showSolutionVar);
     }
 
     public double getPercentage(MediaPlayer mediaPlayer){

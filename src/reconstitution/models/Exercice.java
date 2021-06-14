@@ -7,6 +7,9 @@ public class Exercice implements Serializable {
 	private Texte texte;
 	private Media media;
 	private String consigne;
+	private boolean tempReel;
+	private boolean showSolution;
+	private String aide;
 	
 	//Constructeurs
 	public Exercice() {
@@ -42,7 +45,19 @@ public class Exercice implements Serializable {
 	public void setMedia(Media media) {
 		this.media = media;
 	}
-	
+
+	public void setTempReel(boolean tempReel) {
+		this.tempReel = tempReel;
+	}
+
+	public void setShowSolution(boolean showSolution) {
+		this.showSolution = showSolution;
+	}
+
+	public void setAide(String aide) {
+		this.aide = aide;
+	}
+
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
