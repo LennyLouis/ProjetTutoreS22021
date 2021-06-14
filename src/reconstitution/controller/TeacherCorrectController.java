@@ -25,7 +25,7 @@ public class TeacherCorrectController implements Initializable {
     }
 
     @FXML
-    Label nbMots, timeLabel;
+    Label nbMots, timeLabel, nomEtu;
 
     @FXML
     TextArea texteComplet, reponseEtu;
@@ -50,6 +50,7 @@ public class TeacherCorrectController implements Initializable {
             texteComplet.setText(resultat.getTexte().getVisibleTextClair());
             reponseEtu.setText(resultat.getTexte().getVisibleTextOccult());
             nbMots.setText(resultat.getMotsTrouve()+"/"+resultat.getMotsTotal());
+            nomEtu.setText("Réponse de " + resultat.getNom() + " " + resultat.getPrenom());
 
             if(resultat.getTime()<3660000) {
                 timeLabel.setText("Temps écoulé : " + new SimpleDateFormat("mm:ss").format(resultat.getTime()-3600000));
