@@ -198,7 +198,7 @@ public class Texte implements Serializable {
 	}
 
 	public int getNbMotsDecouv() {
-		return nbMotsDecouv;
+		return nbMotsDecouv--;
 	}
 
 	public int getNbMotsTotal() {
