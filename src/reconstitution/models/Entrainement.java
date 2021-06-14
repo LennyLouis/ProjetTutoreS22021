@@ -8,7 +8,6 @@ public class Entrainement extends Exercice implements Serializable {
 	//Constructeurs
 	public Entrainement() {
 		super();
-		this.getTexte().setMode(1);
 	}
 
 	//Setters & Getters

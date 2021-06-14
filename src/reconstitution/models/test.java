@@ -9,7 +9,7 @@ public class test {
         //exo.setMedia(null);
         Texte text = new Texte('/', false);
         text.setMode(1);
-        text.entrerTexteProf("Je suis le texte. je pue je pète je prend mon cul pour une trompette!");
+        text.entrerTexteProf("Une souris verte qui courait dans l'herbe. Je l'attrape par sa grosse queue et je le fourre en lui brulant les yeux. Je la prend par sa tete.");
         //exo.setTexte(text);
         System.out.println(text.getVisibleTextOccult());
         text.entrerMotEtu("suis");

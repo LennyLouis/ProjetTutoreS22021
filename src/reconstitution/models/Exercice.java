@@ -52,7 +52,7 @@ public class Exercice implements Serializable {
 	}
 	
 	//Methodes
-	public static void sauvegarder(Exercice exercice, String path) {
+	public static void sauvegarder(Object exercice, String path) {
 		try {
             FileOutputStream file = new FileOutputStream(path);
             ObjectOutputStream object = new ObjectOutputStream(file);

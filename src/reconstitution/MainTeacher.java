@@ -33,7 +33,7 @@ public class MainTeacher extends Application {
     }
 
     public static void setView(String path) throws IOException {
-        setView(path, "Reconstitution (étudiant)");
+        setView(path, "Reconstitution (professeur)");
     }
 
     public static void setView(String path, String title) throws IOException {

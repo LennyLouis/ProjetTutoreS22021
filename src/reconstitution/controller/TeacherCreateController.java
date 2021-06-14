@@ -74,10 +74,7 @@ public class TeacherCreateController implements Initializable {
     ImageView uploadLogo;
 
     @FXML
-    TextArea consigne, aide, textClair;
-
-    @FXML
-    TextField title;
+    TextArea consigne, aide, textClair, title;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
