@@ -63,8 +63,8 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextArea fx:id="reponseEtu" layoutX="13.0" layoutY="197.0" prefHeight="246.0" prefWidth="248.0" />
-      <TextArea fx:id="texteComplet" layoutX="458.0" layoutY="195.0" prefHeight="246.0" prefWidth="248.0" />
+      <TextArea fx:id="reponseEtu" editable="false" layoutX="13.0" layoutY="197.0" prefHeight="246.0" prefWidth="248.0" wrapText="true" />
+      <TextArea fx:id="texteComplet" editable="false" layoutX="458.0" layoutY="195.0" prefHeight="246.0" prefWidth="248.0" wrapText="true" />
       <Button layoutX="14.0" layoutY="453.0" mnemonicParsing="false" onAction="#homeButton" text="Accueil" />
    </children>
 </AnchorPane>

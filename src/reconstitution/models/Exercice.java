@@ -38,6 +38,14 @@ public class Exercice implements Serializable {
 		return consigne;
 	}
 
+	public boolean getTempReel() {
+		return tempReel;
+	}
+
+	public boolean didShowSolution() {
+		return showSolution;
+	}
+
 	public void setTexte(Texte texte) {
 		this.texte = texte;
 	}

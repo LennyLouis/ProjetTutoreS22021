@@ -9,8 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -49,6 +51,9 @@ public class StudentMainController implements Initializable {
     private boolean isItGood;
 
     @FXML
+    AnchorPane anchorPane;
+
+    @FXML
     ProgressBar mediaProgressBar;
 
     @FXML
@@ -58,18 +63,25 @@ public class StudentMainController implements Initializable {
     TextArea mediaTextArea;
 
     @FXML
-    Label time, consigne, mediaTime, typeExercice;
+    Label time, consigne, mediaTime, typeExercice, compteurMot;
 
     @FXML
     MediaView mediaView;
 
     @FXML
-    Button playButton, muteButton, solutionButton;
+    Button playButton, muteButton, solutionButton, okButton;
+
+    @FXML
+    HBox reponseHbox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         exo = StudentHomeController.exo;
         initMediaPlayer();
+
+        if(!exo.didShowSolution()){
+            anchorPane.getChildren().removeAll(solutionButton);
+        }
 
         if(exo instanceof Evaluation){
             // Initialisation du timer
@@ -143,10 +155,13 @@ public class StudentMainController implements Initializable {
         System.out.println(reponseTextField.getText());
         System.out.println(exo.getTexte().getVisibleTextOccult());
         mediaTextArea.setText(exo.getTexte().getVisibleTextOccult());
+        if(exo.getTempReel()) {
+            compteurMot.setText(exo.getTexte().getNbMotsDecouv()+"/"+exo.getTexte().getNbMotsTotal());
+        }
     }
 
     @FXML
-    public void afficherLaSolution(){
+    public void afficherSolution(){
         if(!exo.getShowSolution()) {
             mediaTextArea.setText(exo.getTexte().getVisibleTextClair());
             solutionButton.setText("Masquer la solution");
@@ -198,10 +213,9 @@ public class StudentMainController implements Initializable {
                 Resultat resultat = new Resultat(exo.getTexte().getNbMotsDecouv(), exo.getTexte().getNbMotsTotal(), nom.getText(), prenom.getText(), exo.getTexte(), timeCompteur);
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Rendre votre exercice");
-                //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
                 File file = fileChooser.showSaveDialog(MainTeacher.getStage());
                 if (file != null) {
-                    Exercice.sauvegarder(exo, file.getAbsolutePath());
+                    Exercice.sauvegarder(resultat, file.getAbsolutePath());
                 }
                 System.out.println("Fin programme");
             }
@@ -218,13 +232,23 @@ public class StudentMainController implements Initializable {
 
     @FXML
     public void help(){
-
+        Stage stage = new Stage();
+        StackPane stackPane = new StackPane();
+        TextArea textArea = new TextArea(exo.getAide());
+        stackPane.getChildren().add(textArea);
+        textArea.setEditable(false);
+        stackPane.setPrefWidth(400.0);
+        stackPane.setPrefHeight(200.0);
+        textArea.setPrefWidth(400.0);
+        textArea.setPrefHeight(200.0);
+        textArea.setWrapText(true);
+        stage.setTitle("Aide");
+        stage.setScene(new Scene(stackPane));
+        stage.getIcons().add(new Image(MainTeacher.class.getResourceAsStream("/images/help.png")));
+        stage.setResizable(false);
+        stage.show();
     }
 
-    @FXML
-    public void apropos(){
-
-    }
 
     public void initMediaPlayer(){
         // Loading byte[] media into a temporary file
@@ -271,6 +295,11 @@ public class StudentMainController implements Initializable {
             time.setText("Temps restant : " + new SimpleDateFormat("mm:ss").format(compteur-3600000));
         } else {
             time.setText("Temps restant : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
+        }
+        if(compteur-3600000<8.0){
+            reponseHbox.getChildren().removeAll(okButton, reponseTextField);
+            save();
+            timer.cancel();
         }
     }
 

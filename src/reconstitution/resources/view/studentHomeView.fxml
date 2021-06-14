@@ -34,6 +34,6 @@
       <Text layoutX="355.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;Apprendre une langue étrangère facilement, c'est possible !&quot;" />
       <Text layoutX="355.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version étudiant" />
       <Button fx:id="launchButton" layoutX="339.0" layoutY="346.0" mnemonicParsing="false" onAction="#launchApp" prefHeight="25.0" prefWidth="142.0" text="Commencer" />
-      <Button layoutX="380.0" layoutY="66.0" mnemonicParsing="false" onAction="#test" text="Button" />
+      <Button layoutX="380.0" layoutY="66.0" mnemonicParsing="false" onAction="#test" opacity="0.0" text="Button" />
    </children>
 </AnchorPane>

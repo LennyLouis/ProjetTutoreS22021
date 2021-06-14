@@ -39,7 +39,6 @@ public class StudentHomeController implements Initializable {
     public void launchApp() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir un exercice");
-        //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
         File file = fileChooser.showOpenDialog(MainTeacher.getStage());
         if(file!=null) {
             try {

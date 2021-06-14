@@ -71,7 +71,7 @@ public class TeacherCreateController implements Initializable {
     ImageView uploadLogo;
 
     @FXML
-    TextArea consigne, aide, textClair, title;
+    TextArea consigne, textClair, title, aide;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -84,7 +84,6 @@ public class TeacherCreateController implements Initializable {
             //ici tu retire tout les elements qui n'ont pas lieu d'être dans un entrainement
         } else{
             exo = new Evaluation();
-            anchorPane.getChildren().removeAll(aide);
         }
     }
 
@@ -107,12 +106,10 @@ public class TeacherCreateController implements Initializable {
         if(checkFields()){
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Sauvegarder votre exercice");
-            //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
             File file = fileChooser.showSaveDialog(MainTeacher.getStage());
             if (file != null) {
                 constructExercice();
                 Exercice.sauvegarder(exo, file.getAbsolutePath());
-                showDialog(file);
             }
         }
     }
@@ -137,7 +134,6 @@ public class TeacherCreateController implements Initializable {
                 consigne.setText(exo.getConsigne());
                 textClair.setText(exo.getTexte().getVisibleTextClair());
                 title.setText(exo.getTitre());
-                aide.setText(exo.getAide());
             }
         }
     }
@@ -181,8 +177,8 @@ public class TeacherCreateController implements Initializable {
         exo.setTexte(texte);
         exo.setConsigne(consigne.getText());
         exo.setTitre(title.getText());
-        if (timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
         exo.setAide(aide.getText());
+        if (timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
         exo.setTempReel(realTimeVar);
         exo.setShowSolution(showSolutionVar);
     }
@@ -197,7 +193,6 @@ public class TeacherCreateController implements Initializable {
     public void openMedia() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir un média");
-        //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
         File file = fileChooser.showOpenDialog(MainTeacher.getStage());
         if(file!=null) {
             try {
@@ -280,29 +275,6 @@ public class TeacherCreateController implements Initializable {
 
         hbox.getChildren().addAll(playPauseButton, stackPane, muteButton);
         player.getChildren().addAll(mv, hbox);
-    }
-
-    public void showDialog(File createdFile){
-        Stage saveSuccess = new Stage();
-        AnchorPane ap = new AnchorPane();
-        Label label = new Label("Le sauvegarde a été réalisé avec succès.");
-        Button openFolder = new Button("Ouvrir le dossier");
-        Button ok = new Button("OK");
-        ok.setOnAction(e -> {
-            saveSuccess.close();
-        });
-        openFolder.setOnAction(e -> {
-            try {
-                Desktop.getDesktop().open(createdFile.getParentFile());
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-        ap.getChildren().addAll(label, openFolder, ok);
-        saveSuccess.setTitle("Sauvegarde réussie !");
-        saveSuccess.setScene(new Scene(ap, 400, 100));
-        saveSuccess.setResizable(false);
-        saveSuccess.show();
     }
 
     public void initOptions(){

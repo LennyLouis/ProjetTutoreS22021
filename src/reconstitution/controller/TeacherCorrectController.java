@@ -51,11 +51,11 @@ public class TeacherCorrectController implements Initializable {
             reponseEtu.setText(resultat.getTexte().getVisibleTextOccult());
             nbMots.setText(resultat.getMotsTrouve()+"/"+resultat.getMotsTotal());
             nomEtu.setText("Réponse de " + resultat.getNom() + " " + resultat.getPrenom());
-
+            System.out.println("test2");
             if(resultat.getTime()<3660000) {
-                timeLabel.setText("Temps écoulé : " + new SimpleDateFormat("mm:ss").format(resultat.getTime()-3600000));
+                timeLabel.setText(new SimpleDateFormat("mm:ss").format(resultat.getTime()-3600000));
             } else {
-                timeLabel.setText("Temps écoulé : " + new SimpleDateFormat("HH:mm:ss").format(resultat.getTime()-3600000));
+                timeLabel.setText(new SimpleDateFormat("HH:mm:ss").format(resultat.getTime()-3600000));
             }
         }
     }

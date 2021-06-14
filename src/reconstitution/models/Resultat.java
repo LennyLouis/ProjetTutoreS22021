@@ -1,6 +1,8 @@
 package reconstitution.models;
 
-public class Resultat {
+import java.io.Serializable;
+
+public class Resultat implements Serializable {
     private final int motsTrouve;
     private final int motsTotal;
     private final String nom;
