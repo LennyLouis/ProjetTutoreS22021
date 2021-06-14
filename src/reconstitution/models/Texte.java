@@ -25,46 +25,38 @@ public class Texte implements Serializable {
 
 	//Methodes
 	public void entrerTexteProf(String texte) {
-		int c = 0;				//compteur de "case" utilisées du tableau
 		String mot = "";
-		for(int i = 0; i < texte.length(); i++) {
+		int c = 0;
+		for(int i = 0; i < texte.length(); i++){
 			if(texte.charAt(i) != ' ' && texte.charAt(i) != '.' && texte.charAt(i) != '!' && texte.charAt(i) != '?' && texte.charAt(i) != ',') {
 				mot = mot + texte.charAt(i);
 			}
-			//remplissage du texte en clair
-			else {
-				texteClair[c] = mot;
-				tailleTableau++;
-				nbMotsTotal++;
-
-				//remplissage du texte masqué avec le caratère occultant
-				for(int a = 0; a < mot.length(); a++) {
-					if(texteOccult[c] == null){
-						texteOccult[c] = Character.toString(occultChar);
-					}else {
-						texteOccult[c] = texteOccult[c] + occultChar;
-					}
+			if(texte.charAt(i) == '.' || texte.charAt(i) == '!' || texte.charAt(i) =='?' || texte.charAt(i) ==',' || texte.charAt(i) == ' '){
+				texteClair[c] =  mot;
+				if(texteOccult[c] == null){
+					texteOccult[c] = "";
+				}
+				for(int a = 0; a < mot.length(); a++){
+					texteOccult[c] = texteOccult[c] + occultChar;
 				}
 				c++;
-				mot = "";
-			}
-			//gestion de la ponctuation
-			if(texte.charAt(i) == '.' || texte.charAt(i) == '!' || texte.charAt(i) =='?' || texte.charAt(i) ==',') {
-				String ponctuation = "";
-				ponctuation = ponctuation + texte.charAt(i);
-				texteClair[c] = ponctuation;
-				texteOccult[c] = ponctuation;
 				tailleTableau++;
+				nbMotsTotal++;
+				texteClair[c] = Character.toString(texte.charAt(i));
+				texteOccult[c] = Character.toString(texte.charAt(i));
+				c++;
+				tailleTableau++;
+				mot = "";
+				}
 			}
 		}
-		tailleTableau = tailleTableau - 1;
-	}
+
 
 	public String getVisibleTextOccult() {
 		String visibleTexteOccult = "";
 		String[] tableauTexteOccult = getTextOccult();
 		for(int i = 0; i < tailleTableau; i++) {
-			visibleTexteOccult = visibleTexteOccult + texteOccult[i] + " ";
+			visibleTexteOccult = visibleTexteOccult + texteOccult[i];
 		}
 		return visibleTexteOccult;
 	}
