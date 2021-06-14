@@ -7,8 +7,8 @@ public class test {
         //Exercice exo = new Exercice("titre");
         //exo.setConsigne("consigne");
         //exo.setMedia(null);
-        Texte text = new Texte('/', true);
-        text.setMode(3);
+        Texte text = new Texte('/', false);
+        text.setMode(1);
         text.entrerTexteProf("Je suis le texte. je pue je pète je prend mon cul pour une trompette!");
         //exo.setTexte(text);
         System.out.println(text.getVisibleTextOccult());
