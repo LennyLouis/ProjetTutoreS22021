@@ -2,16 +2,30 @@ package reconstitution.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import reconstitution.MainStudent;
+import reconstitution.MainTeacher;
 import reconstitution.models.Evaluation;
 import reconstitution.models.Exercice;
+import reconstitution.models.Resultat;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,6 +45,8 @@ public class StudentMainController implements Initializable {
     private Date dateDebutFin;
     private long compteur;
     public static Timer timer;
+
+    private boolean isItGood;
 
     @FXML
     ProgressBar mediaProgressBar;
@@ -131,7 +147,55 @@ public class StudentMainController implements Initializable {
 
     @FXML
     public void save(){
-
+        openNameDialog();
+        Stage nameStage = new Stage();
+        HBox hBoxTextField = new HBox();
+        HBox hBoxButton = new HBox();
+        VBox vBox = new VBox();
+        TextField nom = new TextField();
+        TextField prenom = new TextField();
+        nom.setPromptText("Nom");
+        prenom.setPromptText("Prénom");
+        Button retour = new Button("Retour");
+        Button valider = new Button("Valider");
+        retour.setOnAction(e -> {
+            nameStage.close();
+        });
+        hBoxTextField.getChildren().addAll(nom, prenom);
+        valider.setOnAction(e -> {
+            isItGood = true;
+            for (Node child : hBoxTextField.getChildren()) {
+              if(child instanceof TextField){
+                  if(((TextField) child).getText().length()<1){
+                      isItGood = false;
+                      child.getStyleClass().add("empty-field");
+                  } else {
+                      child.getStyleClass().removeAll("empty-field");
+                  }
+              }
+            }
+            System.out.println(isItGood);
+            if(isItGood){
+                nameStage.close();
+                Resultat resultat = new Resultat(12, 24, nom.getText(), prenom.getText(), exo.getTexte());
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Rendre votre exercice");
+                //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
+                File file = fileChooser.showSaveDialog(MainTeacher.getStage());
+                if (file != null) {
+                    Exercice.sauvegarder(exo, file.getAbsolutePath());
+                }
+                System.out.println("Fin programme");
+            }
+        });
+        hBoxButton.getChildren().addAll(retour, valider);
+        vBox.getChildren().addAll(hBoxTextField, hBoxButton);
+        nameStage.setTitle("Sauvegarde réussie !");
+        Scene scene = new Scene(vBox, 400, 100);
+        scene.getStylesheets().add(String.valueOf(MainStudent.class.getResource("/style.css")));
+        nameStage.setScene(scene);
+        nameStage.setResizable(false);
+        nameStage.show();
     }
 
     @FXML
@@ -203,6 +267,10 @@ public class StudentMainController implements Initializable {
         } else {
             time.setText("Temps écoulé : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
         }
+    }
+
+    public void openNameDialog(){
+
     }
 
 }
