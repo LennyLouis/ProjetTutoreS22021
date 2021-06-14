@@ -3,6 +3,7 @@ package reconstitution.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -18,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -111,42 +113,10 @@ public class TeacherCreateController implements Initializable {
         fileChooser.setTitle("Sauvegarder votre exercice");
         //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
         File file = fileChooser.showSaveDialog(MainTeacher.getStage());
-        if (file != null) {
-            Texte texte = new Texte(occultCharVar, false);
-            texte.setMode(lettersMotVar);
-            texte.setOccultChar(occultCharVar);
-            texte.setSensiCasse(caseSensitivVar);
-            texte.entrerTexteProf(textClair.getText());
-            exo.setTexte(texte);
-            exo.setConsigne(consigne.getText());
-            exo.setTitre(title.getText());
-            if (timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
-            //TODO: realTime
-            //TODO: showSolution
-            //TODO: Aide
+        if (file != null && checkFields()) {
+            constructExercice();
             Exercice.sauvegarder(exo, file.getAbsolutePath());
-
-
-            Stage saveSuccess = new Stage();
-            AnchorPane ap = new AnchorPane();
-            Label label = new Label("Le sauvegarde a été réalisé avec succès.");
-            Button openFolder = new Button("Ouvrir le dossier");
-            Button ok = new Button("OK");
-            ok.setOnAction(e -> {
-                saveSuccess.close();
-            });
-            openFolder.setOnAction(e -> {
-                try {
-                    Desktop.getDesktop().open(file.getParentFile());
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            });
-            ap.getChildren().addAll(label, openFolder, ok);
-            saveSuccess.setTitle("Sauvegarde réussie !");
-            saveSuccess.setScene(new Scene(ap, 400, 100));
-            saveSuccess.setResizable(false);
-            saveSuccess.show();
+            showDialog(file);
         }
     }
 
@@ -196,6 +166,21 @@ public class TeacherCreateController implements Initializable {
         mediaPlayer.seek(duration);
     }
 
+    public void constructExercice(){
+        Texte texte = new Texte(occultCharVar, false);
+        texte.setMode(lettersMotVar);
+        texte.setOccultChar(occultCharVar);
+        texte.setSensiCasse(caseSensitivVar);
+        texte.entrerTexteProf(textClair.getText());
+        exo.setTexte(texte);
+        exo.setConsigne(consigne.getText());
+        exo.setTitre(title.getText());
+        if (timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
+        //TODO: realTime
+        //TODO: showSolution
+        //TODO: Aide
+    }
+
     public double getPercentage(MediaPlayer mediaPlayer){
         Double duration = mediaPlayer.getMedia().getDuration().toSeconds();
         Double time = mediaPlayer.getCurrentTime().toSeconds();
@@ -220,49 +205,98 @@ public class TeacherCreateController implements Initializable {
             player.getChildren().remove(addMedia);
             anchorPane.getChildren().remove(uploadLogo);
 
-            HBox hbox = new HBox();
-            StackPane stackPane = new StackPane();
-            ProgressBar mediaProgressBar = new ProgressBar(0);
-            Label mediaTime = new Label(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
-
-            playPauseButton = new Button();
-
-            playPauseButton.getStyleClass().addAll("playPause", "white");
-            playPauseButton.setOnAction(actionEvent -> playPause());
-            playPauseButton.setPrefWidth(25.0);
-
-            muteButton = new Button();
-
-            muteButton.getStyleClass().addAll("mute", "white");
-            muteButton.setOnAction(actionEvent -> mute());
-            muteButton.setPrefWidth(25.0);
-
-            mediaProgressBar.setPrefHeight(26.0);
-            mediaProgressBar.setOnMouseClicked(mouseEvent -> {
-                setMediaCursor(mouseEvent.getX() / mediaProgressBar.getWidth());
-            });
-            mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue)->{
-                mediaProgressBar.setProgress(getPercentage(mediaPlayer));
-                mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
-            });
-            mediaTime.setOnMouseClicked(mouseEvent -> {
-                double padding = (mediaProgressBar.getWidth()-mediaTime.getWidth())/2;
-                setMediaCursor((mouseEvent.getX()+padding)/mediaProgressBar.getWidth());
-            });
-
-            MediaView mv = new MediaView();
-            mv.setMediaPlayer(mediaPlayer);
-            mv.setFitWidth(308.0);
-            mv.setOnMouseClicked(mouseEvent -> playPause());
-
-            mediaProgressBar.setPrefWidth(mv.getFitWidth() - playPauseButton.getWidth() - muteButton.getWidth() - 2);
-
-            stackPane.setPrefWidth(mediaProgressBar.getPrefWidth());
-            stackPane.getChildren().addAll(mediaProgressBar, mediaTime);
-
-            hbox.getChildren().addAll(playPauseButton, stackPane, muteButton);
-            player.getChildren().addAll(mv, hbox);
+            createMediaPlayer();
         }
+    }
+
+    public boolean checkFields(){
+        boolean isItGood = true;
+        for (Node child : anchorPane.getChildren()) {
+            if (child instanceof TextArea || child instanceof TextField){
+                if(((TextInputControl) child).getText().length()<2){
+                    isItGood = false;
+                    child.getStyleClass().add("empty-field");
+                    System.out.println(child.getId()+ " pas rempli");
+                } else {
+                    child.getStyleClass().removeAll("empty-field");
+                    System.out.println(child.getId()+ " rempli");
+                }
+            }
+        }
+        if(mediaPlayer==null) {
+            isItGood = false;
+            addMedia.setStrokeWidth(1);
+            addMedia.setStroke(Color.RED);
+        }
+        return isItGood;
+    }
+
+    public void createMediaPlayer(){
+        HBox hbox = new HBox();
+        StackPane stackPane = new StackPane();
+        ProgressBar mediaProgressBar = new ProgressBar(0);
+        Label mediaTime = new Label(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
+
+        playPauseButton = new Button();
+
+        playPauseButton.getStyleClass().addAll("playPause", "white");
+        playPauseButton.setOnAction(actionEvent -> playPause());
+        playPauseButton.setPrefWidth(25.0);
+
+        muteButton = new Button();
+
+        muteButton.getStyleClass().addAll("mute", "white");
+        muteButton.setOnAction(actionEvent -> mute());
+        muteButton.setPrefWidth(25.0);
+
+        mediaProgressBar.setPrefHeight(26.0);
+        mediaProgressBar.setOnMouseClicked(mouseEvent -> {
+            setMediaCursor(mouseEvent.getX() / mediaProgressBar.getWidth());
+        });
+        mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue)->{
+            mediaProgressBar.setProgress(getPercentage(mediaPlayer));
+            mediaTime.setText(new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getCurrentTime().toMillis()-3600000))+"/"+new SimpleDateFormat("H:mm:ss").format(new Date((long) mediaPlayer.getMedia().getDuration().toMillis()-3600000)));
+        });
+        mediaTime.setOnMouseClicked(mouseEvent -> {
+            double padding = (mediaProgressBar.getWidth()-mediaTime.getWidth())/2;
+            setMediaCursor((mouseEvent.getX()+padding)/mediaProgressBar.getWidth());
+        });
+
+        MediaView mv = new MediaView();
+        mv.setMediaPlayer(mediaPlayer);
+        mv.setFitWidth(308.0);
+        mv.setOnMouseClicked(mouseEvent -> playPause());
+
+        mediaProgressBar.setPrefWidth(mv.getFitWidth() - playPauseButton.getWidth() - muteButton.getWidth() - 2);
+
+        stackPane.setPrefWidth(mediaProgressBar.getPrefWidth());
+        stackPane.getChildren().addAll(mediaProgressBar, mediaTime);
+
+        hbox.getChildren().addAll(playPauseButton, stackPane, muteButton);
+        player.getChildren().addAll(mv, hbox);
+    }
+
+    public void showDialog(File createdFile){
+        Stage saveSuccess = new Stage();
+        AnchorPane ap = new AnchorPane();
+        Label label = new Label("Le sauvegarde a été réalisé avec succès.");
+        Button openFolder = new Button("Ouvrir le dossier");
+        Button ok = new Button("OK");
+        ok.setOnAction(e -> {
+            saveSuccess.close();
+        });
+        openFolder.setOnAction(e -> {
+            try {
+                Desktop.getDesktop().open(createdFile.getParentFile());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        ap.getChildren().addAll(label, openFolder, ok);
+        saveSuccess.setTitle("Sauvegarde réussie !");
+        saveSuccess.setScene(new Scene(ap, 400, 100));
+        saveSuccess.setResizable(false);
+        saveSuccess.show();
     }
 
     public void initOptions(){

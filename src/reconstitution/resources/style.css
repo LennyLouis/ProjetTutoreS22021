@@ -27,3 +27,12 @@
 .mute.white {
     -fx-background-image: url('reconstitution/resources/images/unmute-white.png');
 }
+
+.menuBtn {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.empty-field {
+    -fx-background-color: red;
+}

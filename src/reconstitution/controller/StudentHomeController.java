@@ -48,7 +48,7 @@ public class StudentHomeController implements Initializable {
                 e.printStackTrace();
                 return;
             }
-            MainStudent.setView("/view/studentMainView.fxml");
+            MainStudent.setView("/view/studentMainView.fxml","Reconstitution (étudiant) - " + exo.getTitre());
         }
     }
 

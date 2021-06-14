@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reconstitution.controller.StudentMainController">
    <children>
@@ -29,7 +30,7 @@
             <Image url="@../images/avatar_etudiant.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="mediaTextArea" editable="false" layoutX="375.0" layoutY="20.0" prefHeight="300.0" prefWidth="320.0" />
+      <TextArea fx:id="mediaTextArea" editable="false" layoutX="375.0" layoutY="20.0" prefHeight="300.0" prefWidth="320.0" wrapText="true" />
       <HBox layoutX="250.0" layoutY="378.0" prefHeight="25.0" prefWidth="240.0">
          <children>
             <TextField fx:id="reponseTextField" prefHeight="25.0" prefWidth="203.0" promptText="Entrez un mot..." HBox.hgrow="ALWAYS" />
@@ -67,10 +68,13 @@
       </VBox>
       <HBox layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="320.0">
          <children>
-            <Label fx:id="typeExercice" prefHeight="25.0" prefWidth="48.0" text="Exercice" textFill="WHITE" />
-            <Button mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="73.0" text="Enregistrer" />
-            <Button mnemonicParsing="false" onAction="#help" prefHeight="25.0" prefWidth="45.0" text="Aide" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="A propos" />
+            <Label fx:id="typeExercice" prefHeight="25.0" prefWidth="107.0" text="Entrainement" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <Button mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="80.0" styleClass="menuBtn" text="Enregistrer" />
+            <Button mnemonicParsing="false" onAction="#help" prefHeight="25.0" prefWidth="45.0" styleClass="menuBtn" text="Aide" />
+            <Button mnemonicParsing="false" onAction="#apropos" prefHeight="25.0" prefWidth="67.0" styleClass="menuBtn" text="A propos" />
          </children>
       </HBox>
    </children>
