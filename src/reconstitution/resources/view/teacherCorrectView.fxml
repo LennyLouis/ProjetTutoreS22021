@@ -32,13 +32,13 @@
             <Image url="@../images/prof_icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="295.0" layoutY="276.0" mnemonicParsing="false" text="Importer un exercice" />
+      <Button layoutX="295.0" layoutY="276.0" mnemonicParsing="false" onAction="#immport" text="Importer un exercice" />
       <Label layoutX="303.0" layoutY="374.0" text="Temps de l'étudiant" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="344.0" layoutY="392.0" text="00:00" textFill="WHITE">
+      <Label fx:id="timeLabel" layoutX="344.0" layoutY="392.0" text="00:00" textFill="WHITE">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
@@ -48,7 +48,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="352.0" layoutY="434.0" text="../.." textFill="WHITE">
+      <Label fx:id="nbMots" layoutX="352.0" layoutY="434.0" text="../.." textFill="WHITE">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
@@ -63,8 +63,8 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextArea layoutX="13.0" layoutY="197.0" prefHeight="246.0" prefWidth="248.0" />
-      <TextArea layoutX="458.0" layoutY="195.0" prefHeight="246.0" prefWidth="248.0" />
+      <TextArea fx:id="reponseEtu" layoutX="13.0" layoutY="197.0" prefHeight="246.0" prefWidth="248.0" />
+      <TextArea fx:id="texteComplet" layoutX="458.0" layoutY="195.0" prefHeight="246.0" prefWidth="248.0" />
       <Button layoutX="14.0" layoutY="453.0" mnemonicParsing="false" onAction="#homeButton" text="Accueil" />
    </children>
 </AnchorPane>
