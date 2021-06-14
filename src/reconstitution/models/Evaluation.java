@@ -10,6 +10,7 @@ public class Evaluation extends Exercice implements Serializable {
 	//Constructeur
 	public Evaluation() {
 		super();
+		this.getTexte().setMode(1);
 	}
 
 	//Setters & Getters

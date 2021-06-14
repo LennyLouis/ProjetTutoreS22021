@@ -10,7 +10,9 @@ public class test {
         text.entrerTexteProf("Je suis le texte. je pue je pète!");
         //exo.setTexte(text);
         System.out.println(text.getVisibleTextOccult());
-        text.entrerMotEtu("su");
+        text.entrerMotEtu("suis");
+        text.entrerMotEtu("suis");
+        text.entrerMotEtu("suis");
         System.out.println(text.getVisibleTextOccult());
         System.out.println(text.getTexteClair()[4]);
         System.out.println(text.getTextOccult()[4]);
