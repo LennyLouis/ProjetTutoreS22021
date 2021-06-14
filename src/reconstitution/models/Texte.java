@@ -68,7 +68,7 @@ public class Texte implements Serializable {
 		return visibleTexteOccult;
 	}
 
-	void entrerMotEtu(String mot) {
+	public void entrerMotEtu(String mot) {
 		switch(mode) {
 			case 2:								//Mot incomplet 2 lettres
 				if(isSensiCasse()) {
