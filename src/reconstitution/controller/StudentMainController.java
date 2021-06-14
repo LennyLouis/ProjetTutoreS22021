@@ -160,7 +160,6 @@ public class StudentMainController implements Initializable {
 
     @FXML
     public void save(){
-        openNameDialog();
         Stage nameStage = new Stage();
         HBox hBoxTextField = new HBox();
         HBox hBoxButton = new HBox();
@@ -190,7 +189,13 @@ public class StudentMainController implements Initializable {
             System.out.println(isItGood);
             if(isItGood){
                 nameStage.close();
-                Resultat resultat = new Resultat(12, 24, nom.getText(), prenom.getText(), exo.getTexte(), 3600000);
+                long timeCompteur;
+                if(exo instanceof Evaluation && (((Evaluation) exo).getDuree()!=0)){
+                    timeCompteur = (((Evaluation) exo).getDuree()*60000)-compteur-3600000;
+                } else {
+                    timeCompteur = compteur-3600000;
+                }
+                Resultat resultat = new Resultat(exo.getTexte().getNbMotsDecouv(), exo.getTexte().getNbMotsTotal(), nom.getText(), prenom.getText(), exo.getTexte(), timeCompteur);
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Rendre votre exercice");
                 //fileChooser.setSelectedExtensionFilter(); //TODO: extension de fichier dans le FileChooser
@@ -280,10 +285,6 @@ public class StudentMainController implements Initializable {
         } else {
             time.setText("Temps écoulé : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
         }
-    }
-
-    public void openNameDialog(){
-
     }
 
 }

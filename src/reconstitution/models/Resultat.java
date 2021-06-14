@@ -6,9 +6,9 @@ public class Resultat {
     private final String nom;
     private final String prenom;
     private final Texte texte;
-    private final int time;
+    private final long time;
 
-    public Resultat(int motsTrouve, int motsTotal, String nom, String prenom, Texte texte, int time) {
+    public Resultat(int motsTrouve, int motsTotal, String nom, String prenom, Texte texte, long time) {
         this.motsTrouve = motsTrouve;
         this.motsTotal = motsTotal;
         this.nom = nom;
@@ -37,7 +37,7 @@ public class Resultat {
         return texte;
     }
 
-    public int getTime(){
+    public long getTime(){
         return time;
     }
 }
