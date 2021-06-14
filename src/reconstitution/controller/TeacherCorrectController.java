@@ -16,6 +16,11 @@ public class TeacherCorrectController implements Initializable {
         MainTeacher.setView("/view/teacherHomeMenuView.fxml");
     }
 
+    @FXML
+    public void immport() throws IOException {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
