@@ -22,9 +22,8 @@ import java.util.Timer;
 
 public class StudentMainController implements Initializable {
 
-    private static boolean playPauseSwitch = false;
-    private static boolean muteSwitch = false;
-    private static boolean evaluation;
+    private static boolean playPauseSwitch = true;
+    private static boolean muteSwitch = true;
 
     private MediaPlayer mediaPlayer;
     private Exercice exo;
@@ -57,7 +56,6 @@ public class StudentMainController implements Initializable {
         initMediaPlayer();
 
         if(exo instanceof Evaluation){
-            evaluation = true; // TODO: Quelle utilité ?
             // Initialisation du timer
             initTimeRemain();
             // Mise a jour du timer
@@ -185,10 +183,10 @@ public class StudentMainController implements Initializable {
 
     public void updateTimeRemain() {
         compteur = dateDebutFin.getTime() - new Date().getTime();
-        if(compteur<6000) {
-            time.setText("Temps restant : " + new SimpleDateFormat("mm:ss").format(compteur));
+        if(compteur<3660000) {
+            time.setText("Temps restant : " + new SimpleDateFormat("mm:ss").format(compteur-3600000));
         } else {
-            time.setText("Temps restant : " + new SimpleDateFormat("HH:mm:ss").format(compteur));
+            time.setText("Temps restant : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
         }
     }
 
