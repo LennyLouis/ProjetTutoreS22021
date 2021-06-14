@@ -35,6 +35,7 @@ public class Texte implements Serializable {
 				texteClair[c] = mot;
 				c++;
 				nbMotsTotal++;
+				mot = "";
 
 				//remplissage du texte masqué avec le caratère occultant
 				for(int a = 0; a < mot.length(); a++) {
