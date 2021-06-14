@@ -54,6 +54,10 @@ public class Exercice implements Serializable {
 		this.showSolution = showSolution;
 	}
 
+	public boolean getShowSolution(){
+		return showSolution;
+	}
+
 	public void setAide(String aide) {
 		this.aide = aide;
 	}
