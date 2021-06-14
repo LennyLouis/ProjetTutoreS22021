@@ -27,7 +27,7 @@ public class TeacherCorrectController implements Initializable {
     }
 
     @FXML
-    public void immport() throws IOException {
+    public void import() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Importer un rendu d'exercice");
         File file = fileChooser.showOpenDialog(MainTeacher.getStage());
