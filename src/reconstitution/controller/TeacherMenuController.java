@@ -51,18 +51,15 @@ public class TeacherMenuController implements Initializable {
     public void newExercise() throws IOException {
         evaluation = false;
         MainTeacher.setView("/view/teacherCreateView.fxml");
-        System.out.println("exercice");
     }
 
     public void newEvaluation() throws IOException {
         evaluation = true;
         MainTeacher.setView("/view/teacherCreateView.fxml");
-        System.out.println("evaluation");
     }
 
     public void correction() throws IOException {
         MainTeacher.setView("/view/teacherCorrectView.fxml");
-        System.out.println("correct");
     }
 
     public static boolean isEvaluation() {

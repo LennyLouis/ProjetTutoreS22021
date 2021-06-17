@@ -174,12 +174,11 @@ public class StudentMainController implements Initializable {
     @FXML
     public void entrerTexte(){
         exo.getTexte().entrerMotEtu(reponseTextField.getText());
-        System.out.println(reponseTextField.getText());
-        System.out.println(exo.getTexte().getVisibleTextOccult());
         mediaTextArea.setText(exo.getTexte().getVisibleTextOccult());
         if(exo.getTempReel()) {
             compteurMot.setText(exo.getTexte().getNbMotsDecouv()+"/"+exo.getTexte().getNbMotsTotal());
         }
+        reponseTextField.setText("");
     }
 
     @FXML
@@ -226,7 +225,6 @@ public class StudentMainController implements Initializable {
                   }
               }
             }
-            System.out.println(isItGood);
             if(isItGood){
                 nameStage.close();
                 long timeCompteur;

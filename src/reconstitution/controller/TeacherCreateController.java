@@ -201,7 +201,7 @@ public class TeacherCreateController implements Initializable {
     }
 
     public void constructExercice(){
-        Texte texte = new Texte(occultCharVar, caseSensitivVar);
+        Texte texte = new Texte(occultCharVar, !caseSensitivVar);
         texte.setMode(lettersMotVar);
         texte.entrerTexteProf(textClair.getText());
         exo.setTexte(texte);

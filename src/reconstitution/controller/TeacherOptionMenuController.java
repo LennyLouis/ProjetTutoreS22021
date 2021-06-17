@@ -54,7 +54,6 @@ public class TeacherOptionMenuController implements Initializable {
         setTimeLimitVar(timeLimit.isSelected());
         setOccultCharVar(occultChar.getValue().toString().charAt(0));
         setTimeLimitValueVar(Integer.parseInt(timeLimitValue.getText()));
-        System.out.println("débug: " + Integer.parseInt(timeLimitValue.getText()));
         getMenuOption().close();
     }
 
