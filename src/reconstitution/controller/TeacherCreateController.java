@@ -30,19 +30,23 @@ import reconstitution.models.*;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TeacherCreateController implements Initializable {
 
     // Media player
-    private static boolean playPauseSwitch = false;
-    private static boolean muteSwitch = false;
+    private static boolean playPauseSwitch = true;
+    private static boolean muteSwitch = true;
 
     private static Stage menuOption;
+    public static List<File> files;
 
     // JavaFX Nodes
     private Button playPauseButton;
@@ -77,13 +81,14 @@ public class TeacherCreateController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createOptionStage();
         initOptions();
+        files = new ArrayList<>();
 
         if(!TeacherMenuController.isEvaluation()){
             exo = new Entrainement();
             anchorPane.getChildren().removeAll(evaluationTime);
-            //ici tu retire tout les elements qui n'ont pas lieu d'être dans un entrainement
         } else{
             exo = new Evaluation();
+            anchorPane.getChildren().removeAll(aide);
         }
     }
 
@@ -121,7 +126,32 @@ public class TeacherCreateController implements Initializable {
         File file = fileChooser.showOpenDialog(MainTeacher.getStage());
         if(file!=null) {
             try {
-                exo = (Exercice) Exercice.ouvrir(file.getAbsolutePath());
+                Exercice exercice = (Exercice) Exercice.ouvrir(file.getAbsolutePath());
+                if(TeacherMenuController.isEvaluation()){
+                    exo = new Evaluation();
+                } else {
+                    exo = new Exercice();
+                }
+                exo.setAide(exercice.getAide());
+                exo.setShowSolution(exercice.getShowSolution());
+                exo.setConsigne(exercice.getConsigne());
+                exo.setTexte(exercice.getTexte());
+                exo.setTempReel(exercice.getTempReel());
+                exo.setTitre(exercice.getTitre());
+                exo.setMedia(exercice.getMedia());
+                File tempFile = null;
+                try {
+                    tempFile = File.createTempFile("reconstitution-video-temp", ".bin");
+                    try (FileOutputStream fos = new FileOutputStream(tempFile.getAbsolutePath())) {
+                        fos.write(exo.getMedia().getMediaByte());
+                    }
+                    files.add(tempFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                // Creating mediaPlayer
+                mediaPlayer = new MediaPlayer(new Media(tempFile.toURI().toString()));
+                createMediaPlayer();
             } catch (Exception e){
                 e.printStackTrace();
                 return;
@@ -130,10 +160,12 @@ public class TeacherCreateController implements Initializable {
                 consigne.setText(exo.getConsigne());
                 textClair.setText(exo.getTexte().getVisibleTextClair());
                 title.setText(exo.getTitre());
+
             }else{
                 consigne.setText(exo.getConsigne());
                 textClair.setText(exo.getTexte().getVisibleTextClair());
                 title.setText(exo.getTitre());
+                aide.setText(exo.getAide());
             }
         }
     }
@@ -169,10 +201,8 @@ public class TeacherCreateController implements Initializable {
     }
 
     public void constructExercice(){
-        Texte texte = new Texte(occultCharVar, false);
+        Texte texte = new Texte(occultCharVar, caseSensitivVar);
         texte.setMode(lettersMotVar);
-        texte.setOccultChar(occultCharVar);
-        texte.setSensiCasse(caseSensitivVar);
         texte.entrerTexteProf(textClair.getText());
         exo.setTexte(texte);
         exo.setConsigne(consigne.getText());
@@ -203,8 +233,6 @@ public class TeacherCreateController implements Initializable {
                 return;
             }
             exo.setMedia(new reconstitution.models.Media(file.toURI()));
-            player.getChildren().remove(addMedia);
-            anchorPane.getChildren().remove(uploadLogo);
 
             createMediaPlayer();
         }
@@ -217,10 +245,8 @@ public class TeacherCreateController implements Initializable {
                 if(((TextInputControl) child).getText().length()<2){
                     isItGood = false;
                     child.getStyleClass().add("empty-field");
-                    System.out.println(child.getId()+ " pas rempli");
                 } else {
                     child.getStyleClass().removeAll("empty-field");
-                    System.out.println(child.getId()+ " rempli");
                 }
             }
         }
@@ -233,6 +259,11 @@ public class TeacherCreateController implements Initializable {
     }
 
     public void createMediaPlayer(){
+
+        mediaPlayer.stop();
+        player.getChildren().clear();
+        anchorPane.getChildren().remove(uploadLogo);
+
         HBox hbox = new HBox();
         StackPane stackPane = new StackPane();
         ProgressBar mediaProgressBar = new ProgressBar(0);
@@ -339,5 +370,9 @@ public class TeacherCreateController implements Initializable {
 
     public static void setLettersMotVar(int lettersMotVar) {
         TeacherCreateController.lettersMotVar = lettersMotVar;
+    }
+
+    public void setMediaPlayer(MediaPlayer mediaPlayer) {
+        this.mediaPlayer = mediaPlayer;
     }
 }

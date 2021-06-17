@@ -19,16 +19,16 @@ public class TeacherCorrectController implements Initializable {
 
     private Resultat resultat;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
-
     @FXML
     Label nbMots, timeLabel, nomEtu;
 
     @FXML
     TextArea texteComplet, reponseEtu;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 
     @FXML
     public void homeButton() throws IOException {

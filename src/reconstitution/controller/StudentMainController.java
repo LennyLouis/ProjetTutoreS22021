@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 import java.util.Timer;
 
 public class StudentMainController implements Initializable {
@@ -47,6 +48,8 @@ public class StudentMainController implements Initializable {
     private Date dateDebutFin;
     private long compteur;
     public static Timer timer;
+
+    public List<File> files;
 
     private boolean isItGood;
 
@@ -74,13 +77,21 @@ public class StudentMainController implements Initializable {
     @FXML
     HBox reponseHbox;
 
+    @FXML
+    VBox playerVbox;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        files = new ArrayList<>();
         exo = StudentHomeController.exo;
         initMediaPlayer();
 
         if(!exo.didShowSolution()){
             anchorPane.getChildren().removeAll(solutionButton);
+        }
+
+        if(exo.getTempReel()) {
+            compteurMot.setText(exo.getTexte().getNbMotsDecouv()+"/"+exo.getTexte().getNbMotsTotal());
         }
 
         if(exo instanceof Evaluation){
@@ -175,6 +186,9 @@ public class StudentMainController implements Initializable {
 
     @FXML
     public void save(){
+        anchorPane.getChildren().removeAll(playerVbox, reponseHbox);
+        mediaPlayer.stop();
+        timer.cancel();
         Stage nameStage = new Stage();
         HBox hBoxTextField = new HBox();
         HBox hBoxButton = new HBox();
@@ -217,6 +231,7 @@ public class StudentMainController implements Initializable {
                 if (file != null) {
                     Exercice.sauvegarder(resultat, file.getAbsolutePath());
                 }
+                MainStudent.getStage().close();
                 System.out.println("Fin programme");
             }
         });
@@ -228,13 +243,18 @@ public class StudentMainController implements Initializable {
         nameStage.setScene(scene);
         nameStage.setResizable(false);
         nameStage.show();
+        for (File file : files) {
+            file.delete();
+        }
     }
 
     @FXML
     public void help(){
         Stage stage = new Stage();
         StackPane stackPane = new StackPane();
-        TextArea textArea = new TextArea(exo.getAide());
+        TextArea textArea = new TextArea();
+        textArea.setText(exo.getAide());
+        System.out.println(exo.getAide()+" !");
         stackPane.getChildren().add(textArea);
         textArea.setEditable(false);
         stackPane.setPrefWidth(400.0);
@@ -258,6 +278,7 @@ public class StudentMainController implements Initializable {
             try (FileOutputStream fos = new FileOutputStream(tempFile.getAbsolutePath())) {
                 fos.write(exo.getMedia().getMediaByte());
             }
+            files.add(tempFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -315,5 +336,4 @@ public class StudentMainController implements Initializable {
             time.setText("Temps écoulé : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
         }
     }
-
 }

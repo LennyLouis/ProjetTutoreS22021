@@ -34,7 +34,6 @@ public class TeacherOptionMenuController implements Initializable {
         occultChar.getItems().addAll("#","-","_","~");
         occultChar.getSelectionModel().selectFirst();
         editable = true;
-
     }
 
     @FXML

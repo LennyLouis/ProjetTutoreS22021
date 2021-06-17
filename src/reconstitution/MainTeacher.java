@@ -8,7 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import reconstitution.controller.StudentMainController;
+import reconstitution.controller.TeacherCreateController;
 
+import java.io.File;
 import java.io.IOException;
 
 public class MainTeacher extends Application {
