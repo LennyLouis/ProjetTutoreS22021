@@ -18,7 +18,7 @@ public class TeacherHomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        createParamStage();
+
     }
 
     @FXML
@@ -29,18 +29,5 @@ public class TeacherHomeController implements Initializable {
     @FXML
     public void openParam() throws IOException {
         param.show();
-    }
-
-    public void createParamStage(){
-        param = new Stage();
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/view/globalParamView.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        param.setTitle("Paramètres");
-        param.setScene(new Scene(root));
-        param.setResizable(false);
     }
 }

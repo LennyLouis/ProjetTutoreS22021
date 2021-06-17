@@ -9,7 +9,6 @@ public class Exercice implements Serializable {
 	private String consigne;
 	private boolean tempReel;
 	private boolean showSolution;
-	private String aide;
 	
 	//Constructeurs
 	public Exercice() {
@@ -66,14 +65,6 @@ public class Exercice implements Serializable {
 		return showSolution;
 	}
 
-	public void setAide(String aide) {
-		this.aide = aide;
-	}
-
-	public String getAide(){
-		return aide;
-	}
-
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
@@ -108,11 +99,5 @@ public class Exercice implements Serializable {
 
 		return o;
 	}
-	
-	
-	
-	
-	
-	
 	
 }

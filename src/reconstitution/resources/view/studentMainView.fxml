@@ -66,14 +66,20 @@
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="320.0">
+      <HBox fx:id="menuHBox" layoutX="14.0" layoutY="14.0">
          <children>
-            <Label fx:id="typeExercice" prefHeight="25.0" prefWidth="107.0" text="Entrainement" textFill="WHITE">
+            <Label fx:id="typeExercice" prefHeight="25.0" prefWidth="107.0" text="Exercice" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font></Label>
-            <Button mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="80.0" styleClass="menuBtn" text="Enregistrer" />
-            <Button mnemonicParsing="false" onAction="#help" prefHeight="25.0" prefWidth="45.0" styleClass="menuBtn" text="Aide" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="80.0" styleClass="menuBtn" text="Enregistrer">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button fx:id="helpBtn" mnemonicParsing="false" onAction="#help" prefHeight="25.0" prefWidth="45.0" styleClass="menuBtn" text="Aide">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </children>
       </HBox>
       <Button fx:id="solutionButton" layoutX="524.0" layoutY="378.0" mnemonicParsing="false" onAction="#afficherSolution" text="Afficher la solution" />

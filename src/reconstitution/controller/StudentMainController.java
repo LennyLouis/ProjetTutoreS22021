@@ -22,12 +22,11 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import reconstitution.MainStudent;
 import reconstitution.MainTeacher;
+import reconstitution.models.Entrainement;
 import reconstitution.models.Evaluation;
 import reconstitution.models.Exercice;
 import reconstitution.models.Resultat;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -72,10 +71,10 @@ public class StudentMainController implements Initializable {
     MediaView mediaView;
 
     @FXML
-    Button playButton, muteButton, solutionButton, okButton;
+    Button playButton, muteButton, solutionButton, okButton, saveBtn, helpBtn;
 
     @FXML
-    HBox reponseHbox;
+    HBox reponseHbox, menuHBox;
 
     @FXML
     VBox playerVbox;
@@ -99,12 +98,23 @@ public class StudentMainController implements Initializable {
             initTimeRemain();
             // Mise a jour du timer
             timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    javafx.application.Platform.runLater(() -> updateTimeRemain());
-                }
-            }, 0, 1000);
+            if(((Evaluation) exo).getDuree()==0){
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        javafx.application.Platform.runLater(() -> updateTimeLeft());
+                    }
+                }, 0, 1000);
+            } else {
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        javafx.application.Platform.runLater(() -> updateTimeRemain());
+                    }
+                }, 0, 1000);
+            }
+            typeExercice.setText("Evaluation");
+            menuHBox.getChildren().remove(helpBtn);
         } else {
             // Initialisation du timer
             initTimeLeft();
@@ -116,6 +126,7 @@ public class StudentMainController implements Initializable {
                     javafx.application.Platform.runLater(() -> updateTimeLeft());
                 }
             }, 0, 1000);
+            typeExercice.setText("Entrainement");
         }
         // Consigne
         consigne.setText("Consigne : "+exo.getConsigne());
@@ -253,8 +264,7 @@ public class StudentMainController implements Initializable {
         Stage stage = new Stage();
         StackPane stackPane = new StackPane();
         TextArea textArea = new TextArea();
-        textArea.setText(exo.getAide());
-        System.out.println(exo.getAide()+" !");
+        textArea.setText(((Entrainement) exo).getAide());
         stackPane.getChildren().add(textArea);
         textArea.setEditable(false);
         stackPane.setPrefWidth(400.0);

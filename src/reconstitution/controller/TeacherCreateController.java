@@ -130,9 +130,9 @@ public class TeacherCreateController implements Initializable {
                 if(TeacherMenuController.isEvaluation()){
                     exo = new Evaluation();
                 } else {
-                    exo = new Exercice();
+                    exo = new Entrainement();
+                    if(exercice instanceof Entrainement) ((Entrainement) exo).setAide(((Entrainement) exercice).getAide());
                 }
-                exo.setAide(exercice.getAide());
                 exo.setShowSolution(exercice.getShowSolution());
                 exo.setConsigne(exercice.getConsigne());
                 exo.setTexte(exercice.getTexte());
@@ -165,7 +165,7 @@ public class TeacherCreateController implements Initializable {
                 consigne.setText(exo.getConsigne());
                 textClair.setText(exo.getTexte().getVisibleTextClair());
                 title.setText(exo.getTitre());
-                aide.setText(exo.getAide());
+                aide.setText(((Entrainement) exo).getAide());
             }
         }
     }
@@ -207,7 +207,7 @@ public class TeacherCreateController implements Initializable {
         exo.setTexte(texte);
         exo.setConsigne(consigne.getText());
         exo.setTitre(title.getText());
-        exo.setAide(aide.getText());
+        if (exo instanceof Entrainement) ((Entrainement) exo).setAide(aide.getText());
         if (timeLimitVar) ((Evaluation) exo).setDuree(timeLimitValueVar);
         exo.setTempReel(realTimeVar);
         exo.setShowSolution(showSolutionVar);

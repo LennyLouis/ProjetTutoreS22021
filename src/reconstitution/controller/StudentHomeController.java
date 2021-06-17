@@ -70,21 +70,7 @@ public class StudentHomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        createParamStage();
     }
-    public void createParamStage(){
-        param = new Stage();
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/view/globalParamView.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        param.setTitle("Paramètres");
-        param.setScene(new Scene(root));
-        param.setResizable(false);
-    }
-
 
     public double percent(double per, double total){
         return total*(per/100);
