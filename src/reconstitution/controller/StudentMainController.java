@@ -325,7 +325,7 @@ public class StudentMainController implements Initializable {
         } else {
             time.setText("Temps restant : " + new SimpleDateFormat("HH:mm:ss").format(compteur-3600000));
         }
-        if(compteur-3600000<8.0){
+        if(compteur<8.0){
             reponseHbox.getChildren().removeAll(okButton, reponseTextField);
             save();
             timer.cancel();
